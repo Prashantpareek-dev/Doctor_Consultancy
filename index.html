@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>विशेषज्ञ डॉक्टर परामर्श — MediCare</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --blue: #1a56db;
+      --blue2: #1e40af;
+      --sky: #3b82f6;
+      --skylt: #dbeafe;
+      --cyan: #06b6d4;
+      --gold: #f59e0b;
+      --white: #ffffff;
+      --offwh: #f0f6ff;
+      --muted: #64748b;
+      --ink: #0f172a;
+      --red: #ef4444;
+      --green: #10b981;
+      --card-bg: #f8faff;
+      --border: #e0eaff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      background: var(--offwh);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      transition: opacity .7s, visibility .7s;
+    }
+
+    .loader-ring {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, .15);
+      border-top-color: var(--sky);
+      animation: spin 1s linear infinite;
+    }
+
+    .loader-plus {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+    }
+
+    .loader-plus::before,
+    .loader-plus::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 3px;
+    }
+
+    .loader-plus::before {
+      width: 6px;
+      height: 36px;
+      left: 15px;
+      top: 0;
+    }
+
+    .loader-plus::after {
+      width: 36px;
+      height: 6px;
+      left: 0;
+      top: 15px;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 2px 20px rgba(10, 22, 40, .4);
+    }
+
+    .topbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: white;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 900;
+      color: white;
+      box-shadow: 0 3px 12px rgba(26, 86, 219, .5);
+    }
+
+    .topbar-badge {
+      font-size: 11px;
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, .3);
+      background: rgba(6, 182, 212, .08);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      opacity: .22;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(165deg, rgba(10, 22, 40, .97) 0%, rgba(26, 86, 219, .45) 55%, rgba(6, 182, 212, .2) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 24px 50px;
+    }
+
+    /* Mesh pattern */
+    .hero-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(59, 130, 246, .12) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, .12);
+      border: 1px solid rgba(6, 182, 212, .3);
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      align-self: flex-start;
+      animation: slideDown .7s ease;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: blink 1.3s infinite;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      color: white;
+      margin-bottom: 16px;
+      animation: fadeUp .8s ease;
+      letter-spacing: -.3px;
+    }
+
+    .hero h1 span {
+      color: var(--cyan);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255, 255, 255, .72);
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      animation: fadeUp .8s ease .15s both;
+    }
+
+    /* ── HERO REVIEW STRIP ── */
+    .hero-reviews {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeUp .8s ease .3s both;
+    }
+
+    .review-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 14px;
+      padding: 12px 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .review-avatars {
+      display: flex;
+    }
+
+    .review-avatars img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      margin-right: -8px;
+      object-fit: cover;
+    }
+
+    .review-avatars img:last-child {
+      margin-right: 0;
+    }
+
+    .review-info {
+      flex: 1;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .review-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .7);
+      font-weight: 600;
+    }
+
+    .review-count {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .review-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .5);
+      font-weight: 600;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: white;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px 10px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    /* ── URGENCY BAR ── */
+    .urgency {
+      background: linear-gradient(90deg, #dc2626, #f59e0b);
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: .2px;
+    }
+
+    /* ── SECTION HEADING ── */
+    .sec-head {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .sec-line {
+      width: 44px;
+      height: 4px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      margin: 0 auto 14px;
+    }
+
+    .sec-head h2 {
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .sec-head p {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .sec {
+      padding: 36px 20px;
+    }
+
+    .sec-dark {
+      background: var(--navy);
+    }
+
+    .sec-white {
+      background: white;
+    }
+
+    .sec-light {
+      background: var(--offwh);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 20px;
+    }
+
+    /* ── WARNING BOX ── */
+    .warn-box {
+      background: white;
+      border: 1px solid #fecaca;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(239, 68, 68, .08);
+    }
+
+    .warn-head {
+      background: linear-gradient(90deg, #7f1d1d, #dc2626);
+      padding: 14px 20px;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      text-align: center;
+    }
+
+    .warn-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #fef2f2;
+    }
+
+    .warn-item:last-child {
+      border-bottom: none;
+    }
+
+    .warn-ico {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      background: #fef2f2;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+
+    .warn-item strong {
+      display: block;
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .warn-item span {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── DISEASE CARDS ── */
+    .dis-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 16px rgba(26, 86, 219, .06);
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .dis-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26, 86, 219, .15);
+    }
+
+    .dis-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dis-card-body {
+      padding: 20px;
+    }
+
+    .dis-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 12px;
+    }
+
+    .dis-badge.piles {
+      background: #fdf2f8;
+      color: #9d174d;
+    }
+
+    .dis-badge.kidney {
+      background: #eff6ff;
+      color: #1e40af;
+    }
+
+    .dis-badge.diabetes {
+      background: #fffbeb;
+      color: #92400e;
+    }
+
+    .dis-badge.heart {
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .dis-card h3 {
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .tag-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: var(--offwh);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tag::before {
+      content: '•';
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    /* ── TRUST CHIPS ── */
+    .trust-chips {
+      background: linear-gradient(135deg, var(--navy), var(--blue2));
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .trust-chip {
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .15);
+      padding: 7px 16px;
+      border-radius: 30px;
+    }
+
+    /* ── OFFER CARDS ── */
+    .offer-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: stretch;
+      margin-bottom: 14px;
+      transition: box-shadow .3s;
+    }
+
+    .offer-card:hover {
+      box-shadow: 0 8px 28px rgba(26, 86, 219, .12);
+    }
+
+    
+
+    .offer-body {
+      padding: 18px;
+    }
+
+    .offer-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .offer-body h4 {
+      font-size: 17px;
+      color: var(--navy);
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+
+    .offer-body p {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── STEPS ── */
+    .step-wrap {
+      display: flex;
+      gap: 0;
+    }
+
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 16px;
+    }
+
+    .step-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+      z-index: 1;
+      box-shadow: 0 4px 16px rgba(26, 86, 219, .4);
+    }
+
+    .step-vline {
+      width: 2px;
+      flex: 1;
+      min-height: 36px;
+      background: linear-gradient(180deg, var(--blue), var(--border));
+      margin: 4px 0;
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      flex: 1;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+      transition: border-color .3s;
+    }
+
+    .step-card:hover {
+      border-color: var(--sky);
+    }
+
+    .step-card h4 {
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+
+    .step-card p {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── APPROACH GRID ── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .app-card {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background .3s;
+    }
+
+    .app-card:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .app-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .app-ico {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .app-card h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--cyan);
+      line-height: 1.3;
+    }
+
+    .app-card p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .55);
+      font-weight: 600;
+    }
+
+    .approach-note {
+      background: rgba(6, 182, 212, .12);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 14px 14px 0;
+      padding: 16px;
+      margin-top: 4px;
+    }
+
+    .approach-note strong {
+      display: block;
+      font-size: 16px;
+      color: #a5f3fc;
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+
+    .approach-note p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .65);
+      font-weight: 600;
+    }
+
+    /* ── CERT GRID ── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .cert-card {
+      background: var(--offwh);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(26, 86, 219, .1);
+    }
+
+    .cert-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .cert-ico {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: var(--skylt);
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .cert-card h4 {
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    .cert-card p {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── SLOTS CARD ── */
+    .slots-card {
+      background: linear-gradient(145deg, var(--blue2), var(--navy));
+      border-radius: 24px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(26, 86, 219, .35);
+    }
+
+    .slots-card::after {
+      content: '🎁';
+      position: absolute;
+      bottom: -10px;
+      right: -6px;
+      font-size: 90px;
+      opacity: .1;
+      pointer-events: none;
+    }
+
+    .slots-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, .12);
+      border: 1px solid rgba(6, 182, 212, .25);
+      padding: 7px 14px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+    }
+
+    .slots-nums {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .slot-num-box {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .slot-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .slot-l {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .45);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    /* ── REVIEWS SECTION ── */
+    .review-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .review-card {
+      background: white;
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(26, 86, 219, .05);
+    }
+
+    .review-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .review-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 900;
+      position: absolute;
+      top: -14px;
+      left: 14px;
+      line-height: 1;
+      color: var(--skylt);
+      pointer-events: none;
+    }
+
+    .review-card p.text {
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.75;
+      padding-top: 30px;
+      font-weight: 600;
+    }
+
+    .review-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .review-footer img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--skylt);
+    }
+
+    .review-footer .name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .review-footer .loc {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .review-stars-right {
+      margin-left: auto;
+      color: var(--gold);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 4px;
+    }
+
+    /* REVIEW STATS ROW */
+    .review-stats {
+      background: var(--skylt);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .review-big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .review-meta {
+      flex: 1;
+    }
+
+    .review-meta .stars {
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .review-meta p {
+      font-size: 14px;
+      color: var(--blue2);
+      font-weight: 700;
+    }
+
+    .review-bar-wrap {
+      margin-top: 8px;
+    }
+
+    .review-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .review-bar-row span {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      width: 24px;
+    }
+
+    .review-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(26, 86, 219, .15);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .review-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-radius: 4px;
+    }
+
+    /* ── FAQ ── */
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      cursor: pointer;
+    }
+
+    .faq-q span {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      padding-right: 12px;
+    }
+
+    .faq-ico {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--skylt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--blue);
+      flex-shrink: 0;
+      transition: transform .3s, background .3s;
+    }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 0 20px;
+    }
+
+    .faq-open .faq-body {
+      max-height: 200px;
+      padding-bottom: 18px;
+    }
+
+    .faq-open .faq-ico {
+      transform: rotate(45deg);
+      background: var(--blue);
+      color: white;
+    }
+
+    /* ── FORM ── */
+    .form-wrap {
+      background: linear-gradient(155deg, var(--navy) 0%, var(--blue2) 100%);
+      padding: 36px 20px;
+    }
+
+    .form-wrap label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .6);
+      margin-bottom: 8px;
+      letter-spacing: .5px;
+    }
+
+    .form-wrap input,
+    .form-wrap select {
+      width: 100%;
+      background: rgba(255, 255, 255, .08);
+      border: 1.5px solid rgba(255, 255, 255, .18);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      outline: none;
+      transition: border-color .3s, background .3s;
+    }
+
+    .form-wrap input:focus,
+    .form-wrap select:focus {
+      border-color: var(--cyan);
+      background: rgba(255, 255, 255, .13);
+    }
+
+    .form-wrap input::placeholder {
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-select-wrap {
+      position: relative;
+    }
+
+    .form-select-wrap select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .form-select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, .5);
+      pointer-events: none;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 28px rgba(26, 86, 219, .5);
+      transition: transform .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .15), transparent);
+      transform: translateX(-100%);
+      transition: transform .5s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(26, 86, 219, .6);
+    }
+
+    .btn-primary:hover::after {
+      transform: translateX(100%);
+    }
+
+    .btn-white {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      background: white;
+      color: var(--navy);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .2);
+      transition: transform .3s, box-shadow .3s;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ── MODERN SLIDER STYLES ── */
+    .modern-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .modern-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s;
+    }
+
+    .modern-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.6);
+    }
+
+    .modern-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s;
+    }
+
+    .modern-slider::-moz-range-thumb:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.6);
+    }
+
+    /* ── FLOAT BTN ── */
+    .float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 16px;
+      z-index: 40;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: white;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 14px 22px;
+      border-radius: 40px;
+      box-shadow: 0 8px 28px rgba(26, 86, 219, .5);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: floatY 3s ease-in-out infinite;
+    }
+
+    /* ── SUCCESS MSG ── */
+    #s-msg {
+      display: none;
+      margin-top: 16px;
+      background: rgba(16, 185, 129, .15);
+      border: 1px solid rgba(16, 185, 129, .4);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: #6ee7b7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f1d;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    footer .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    footer .f-bottom {
+      font-size: 12px;
+      color: #334155;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .2;
+      }
+    }
+
+    @keyframes floatY {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-7px);
+      }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .rv {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .rv.vis {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-ring"></div>
+    <div class="loader-plus" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <p
+      style="font-family:'Playfair Display',serif;font-size:16px;color:rgba(255,255,255,.7);font-weight:700;margin-top:50px">
+      विशेषज्ञ परामर्श सेवा</p>
+  </div>
+
+  <!-- FLOAT BUTTON -->
+  <a href="#book" class="float-btn">📅 अभी बुक करें</a>
+
+  <div class="wrap">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="topbar-logo">
+        <div class="logo-icon">✚</div>
+        MediCare
+      </div>
+      <span class="topbar-badge">⚕ Verified Doctors</span>
+    </div>
+    
+    <!-- ══════════ HERO SECTION ══════════ -->
+    <section class="relative min-h-screen overflow-hidden dot-grid" style="background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 58, 95, 0.8) 50%, rgba(15, 23, 42, 1) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1080&q=80'); background-position:center; background-size:cover;">
+      
+      <!-- Ambient glows -->
+      <div class="absolute top-10 left-[-60px] w-64 h-64 rounded-full opacity-20" style="background:radial-gradient(circle,#2563eb,transparent)"></div>
+      <div class="absolute bottom-20 right-[-40px] w-48 h-48 rounded-full opacity-15" style="background:radial-gradient(circle,#06b6d4,transparent)"></div>
+      
+      <div class="relative px-5 py-4">
+      <!-- <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=480&q=80" alt="Doctor"
+      class="hero-img" /> -->
+
+      <!-- Live badge -->
+      <div class="anim-fadeUp flex items-center gap-2 self-start mb-6 inline-flex">
+        <span class="flex items-center gap-2 text-xs font-bold text-cyan-300 bg-cyan-400/10 border border-cyan-400/25 px-3 py-1.5 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 anim-blink inline-block"></span>
+          🩺 Expert Medical Information
+        </span>
+      </div>
+
+      <!-- Main headline -->
+      <h1 class="anim-fadeUp3 text-3xl font-black text-white leading-tight mb-7" style="font-family:'Playfair Display',serif">
+        भारत में लाखों लोग <span style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Diabetes, Heart Disease, Kidney Stone</span> और <span style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Piles</span> जैसी बीमारियों और <span style="color:#fbbf24">लाखो पैसे खर्च</span> करने के बाद भी जूझ रहे हैं — लेकिन असली खतरा बीमारी से ज्यादा, उसके बारे में फैली <span style="background:linear-gradient(135deg,#ef4444,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">गलत जानकारी</span> है।
+      </h1> 
+
+      <!-- Intro para -->
+      <p class="anim-fadeUp2 text-xl text-white leading-relaxed mb-4 font-bold">
+        🚨 क्या <span style="background:linear-gradient(135deg,#ef4444,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">गलत जानकारी</span> आपकी <span style="color:#fbbf24">बीमारी</span> को और <span style="color:#f87171">गंभीर</span> बना रही है?
+      </p>
+
+
+      <!-- Myths grid -->
+      <div class="anim-fadeUp4 grid grid-cols-2 gap-2 mb-6">
+        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
+          <span class="text-red-400 text-base flex-shrink-0">❌</span>
+          <span class="text-base text-red-300 font-bold leading-snug">"7 दिन में जड़ से खत्म"</span>
+        </div>
+        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
+          <span class="text-red-400 text-base flex-shrink-0">❌</span>
+          <span class="text-base text-red-300 font-bold leading-snug">"डॉक्टर के महंगे इलाज"</span>
+        </div>
+        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
+          <span class="text-red-400 text-base flex-shrink-0">❌</span>
+          <span class="text-base text-red-300 font-bold leading-snug">"सिर्फ सर्जरी से ही होगा इलाज"</span>
+        </div>
+        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
+          <span class="text-red-400 text-base flex-shrink-0">❌</span>
+          <span class="text-base text-red-300 font-bold leading-snug">"घरेलू तेल से 3 दिन में गायब"</span>
+        </div>
+      </div>
+
+      <!-- Truth box -->
+      <div class="rv bg-amber-500/10 border border-amber-400/30 rounded-2xl p-4 mb-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-amber-400 text-lg">⚠️</span>
+          <span class="text-amber-300 font-bold text-lg">सच्चाई यह है:</span>
+        </div>
+        <ul class="space-y-2">
+          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
+            <span class="text-blue-400 font-black mt-0.5">›</span>
+            ज़रूरत से ज्यादा शुगर दिल और किडनी को प्रभावित कर सकती है।
+          </li>
+          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
+            <span class="text-blue-400 font-black mt-0.5">›</span>
+            छोटी पथरी Infection में बदल सकती है।
+          </li>
+          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
+            <span class="text-blue-400 font-black mt-0.5">›</span>
+            लंबे समय की बवासीर गंभीर स्टेज तक जा सकती है।
+          </li>
+          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
+            <span class="text-blue-400 font-black mt-0.5">›</span>
+            नजरअंदाज किया गया हार्ट ब्लॉकेज जानलेवा साबित हो सकता है।
+          </li>
+        </ul>
+      </div>
+
+      <!-- CTA wisdom -->
+      <div class="rv bg-blue-600/15 border border-blue-500/25 rounded-2xl p-4 mb-7">
+        <p class="text-lg text-blue-200 font-bold mb-1">🧠 अब समय है सही और वैज्ञानिक जानकारी जानने का।</p>
+        <p class="text-base text-white/60 font-semibold leading-relaxed">ना डर फैलाना। ना झूठे वादे। जो सच है, वही जानकारी।</p>
+      </div>
+
+      <!-- Read more CTA -->
+      <a href="#diseases" class="rv btn-shine w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold text-white text-lg transition-all hover:scale-[1.02]"
+         style="background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 8px 28px rgba(37,99,235,.45)">
+        👉 आगे पढ़ें और समझें →
+      </a>
+    </div>
+  </section>
+
+    <!-- STATS -->
+    <div class="stats rv">
+      <div class="stat-item">
+        <div class="stat-num">10K+</div>
+        <div class="stat-lbl">मरीज़ लाभान्वित</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-lbl">विशेषज्ञ डॉक्टर</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-lbl">संतुष्ट मरीज़</div>
+      </div>
+    </div>
+
+    <!-- URGENCY -->
+    <div class="urgency">
+      <span
+        style="width:8px;height:8px;border-radius:50%;background:white;animation:blink 1.2s infinite;display:inline-block"></span>
+      सीमित Consultation Slots — देरी न करें
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- DISEASE CARDS -->
+    <div class="sec sec-white">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>आपकी समस्या पहचानें</h2>
+        <p>इन लक्षणों को नज़रअंदाज़ न करें</p>
+      </div>
+
+      <div class="disease-cards-wrapper">
+      <div class="rv dis-card">
+        <img src="./Image/Problem1.png" alt="Piles" />
+        <div class="dis-card-body">
+          <div class="dis-badge piles">🍑 Piles · बवासीर</div>
+          <h3>बवासीर की समस्या</h3>
+          <div class="tag-wrap">
+            <span class="tag">मल में खून</span>
+            <span class="tag">बैठने में दर्द</span>
+            <span class="tag">लंबी कब्ज</span>
+            <span class="tag">जलन व सूजन</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv dis-card">
+        <img src="./Image/Problem2.png" alt="Kidney" />
+        <div class="dis-card-body">
+          <div class="dis-badge kidney">🪨 Kidney Stone · पथरी</div>
+          <h3>किडनी की पथरी</h3>
+          <div class="tag-wrap">
+            <span class="tag">कमर में दर्द</span>
+            <span class="tag">पेशाब में जलन</span>
+            <span class="tag">Infection</span>
+            <span class="tag">उल्टी-मतली</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv dis-card">
+        <img src="./Image/Problem3.png" alt="Diabetes" />
+        <div class="dis-card-body">
+          <div class="dis-badge diabetes">🩸 Diabetes · मधुमेह</div>
+          <h3>मधुमेह (शुगर)</h3>
+          <div class="tag-wrap">
+            <span class="tag">बार-बार प्यास</span>
+            <span class="tag">घाव देर से भरना</span>
+            <span class="tag">अत्यधिक थकान</span>
+            <span class="tag">धुंधली दृष्टि</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv dis-card">
+        <img src="./Image/Problem4.png" alt="Heart" />
+        <div class="dis-card-body">
+          <div class="dis-badge heart">❤️ Heart · हृदय</div>
+          <h3>हृदय रोग</h3>
+          <div class="tag-wrap">
+            <span class="tag">सीने में जकड़न</span>
+            <span class="tag">सांस फूलना</span>
+            <span class="tag">हाई BP</span>
+            <span class="tag">अनियमित धड़कन</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- TRUST CHIPS -->
+    <!-- <div class="trust-chips rv">
+      <span class="trust-chip">✅ Evidence Based</span>
+      <span class="trust-chip">🔒 Privacy Protected</span>
+      <span class="trust-chip">📞 Online Available</span>
+      <span class="trust-chip">⭐ Certified Doctors</span>
+    </div> -->
+
+        <!-- ══════════ ANALYSIS SECTION ══════════ -->
+  <section class="py-4 px-4" id="analysis"
+    style="background:linear-gradient(160deg,#eff6ff 0%,#e0f2fe 60%,#eff6ff 100%)">
+
+    <div class="rv text-center mb-8">
+      <div class="w-10 h-1 rounded-full mx-auto mb-4" style="background:linear-gradient(90deg,#2563eb,#06b6d4)"></div>
+      <h2 class="text-2xl font-black text-slate-900 mb-2">स्वास्थ्य विश्लेषण करें</h2>
+      <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी के लक्षणों की severity slide करके जानें</p>
+    </div>
+
+    <!-- MAIN CARD — vertical list layout like screenshot -->
+    <div class="rv max-w-xl mx-auto rounded-3xl overflow-hidden"
+         style="background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border:1px solid #e0eaff;box-shadow:0 20px 60px rgba(37,99,235,.18)">
+
+      <!-- Card Header -->
+      <div class="px-7 pt-7 pb-5 text-center" style="background:linear-gradient(135deg,#f0f6ff,#ffffff)">
+        <div class="flex items-center justify-center gap-3 mb-2">
+          <span class="text-3xl">🩺</span>
+          <h3 class="text-2xl font-black" style="background:linear-gradient(135deg,#2563eb,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Health Analysis</h3>
+        </div>
+        <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी की severity नीचे slide करें</p>
+      </div>
+
+      <div class="h-px mx-0" style="background:linear-gradient(to right,transparent,#bfdbfe,transparent)"></div>
+
+      <!-- SLIDERS LIST -->
+      <div class="px-6 pt-6 pb-3 space-y-8">
+
+        <!-- DIABETES -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🩸</span>
+              <span>Diabetes (मधुमेह):</span>
+            </label>
+            <span id="vd" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#d97706,#f59e0b)">0%</span>
+          </div>
+          <input type="range" id="dis-diabetes" min="0" max="100" value="0" class="w-full modern-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)"/>
+        </div>
+
+        <!-- HEART DISEASE -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">❤️</span>
+              <span>Heart Disease (हृदय):</span>
+            </label>
+            <span id="vh" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#dc2626,#ef4444)">0%</span>
+          </div>
+          <input type="range" id="dis-heart" min="0" max="100" value="0" class="w-full modern-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)" data-c1="#dc2626" data-c2="#ef4444"/>
+        </div>
+
+        <!-- KIDNEY STONE -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🪨</span>
+              <span>Kidney Stone (पथरी):</span>
+            </label>
+            <span id="vk" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">0%</span>
+          </div>
+          <input type="range" id="dis-kidney" min="0" max="100" value="0" class="w-full modern-slider kidney-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)"/>
+        </div>
+
+        <!-- PILES -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">🍑</span>
+              <span>Piles (बवासीर):</span>
+            </label>
+            <span id="vp" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#6d28d9,#8b5cf6)">0%</span>
+          </div>
+          <input type="range" id="dis-piles" min="0" max="100" value="0" class="w-full modern-slider piles-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)"/>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="h-px mx-6 mt-4" style="background:linear-gradient(to right,transparent,#bfdbfe,transparent)"></div>
+
+      <!-- SCORE SUMMARY ROW -->
+      <div class="mx-6 my-5 flex items-stretch rounded-2xl overflow-hidden border border-blue-100">
+        <div class="flex-1 text-center py-4 px-2 border-r border-blue-100" style="background:#f8faff">
+          <div class="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wide">Selected</div>
+          <div id="selectedCount" class="text-2xl font-black leading-none" style="color:#2563eb;font-family:'Playfair Display',serif">0</div>
+          <div class="text-xs font-bold text-slate-400 mt-1">बीमारियाँ</div>
+        </div>
+        <div class="flex-1 text-center py-4 px-2" style="background:#f0f6ff">
+          <div class="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wide">Score</div>
+          <div id="healthScore" class="text-2xl font-black leading-none transition-colors duration-300" style="color:#2563eb;font-family:'Playfair Display',serif">0%</div>
+          <div class="text-xs font-bold text-slate-400 mt-1">Health</div>
+        </div>
+      </div>
+
+      <!-- RESULT BOX -->
+      <div id="resultBox" class="mx-6 mb-5 p-5 rounded-2xl border-2 transition-all duration-500" style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border-color:#e2e8f0">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-bold text-slate-500">स्थिति / Status:</span>
+          <span id="category" class="px-3 py-1 rounded-full text-xs font-black transition-all duration-300" style="background:#e2e8f0;color:#64748b">—</span>
+        </div>
+        <p class="text-sm font-black mb-3 transition-colors duration-300" id="alertText"></p>
+        <div class="p-3 rounded-xl" style="background:rgba(255,255,255,.9);border:1px solid #e2e8f0">
+          <p class="text-slate-600 text-sm font-semibold leading-relaxed" id="message">🔍 ऊपर किसी भी बीमारी का slider move करें — score automatically calculate होगा</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="px-6 pb-7">
+        <button class="btn-shine w-full py-4 rounded-2xl font-black text-base text-white flex items-center justify-center gap-3 transition-all hover:scale-[1.02]"
+                style="background:linear-gradient(135deg,#2563eb,#3b82f6);box-shadow:0 8px 28px rgba(37,99,235,.4)"
+                onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
+          <span class="text-xl">📋</span>
+          <span>Get Professional Consultation</span>
+          <span class="text-base animate-pulse">✨</span>
+        </button>
+      </div>
+
+    </div><!-- /main card -->
+  </section>
+
+    <!-- WHAT WE OFFER -->
+    <div class="sec sec-light">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>हम क्या प्रदान करते हैं?</h2>
+        <p>Specialist Doctor द्वारा संपूर्ण मार्गदर्शन</p>
+      </div>
+      <div class="rv offer-cards-wrapper">
+        <div class="offer-card">
+          <img src="./Image/Benifit1.png" class="w-36 h-36"  alt="Consultation" />
+          <div class="offer-body">
+            <div class="offer-num">01</div>
+            <h4>विस्तृत मेडिकल चर्चा</h4>
+            <p>आपकी स्थिति की पूरी समीक्षा और जरूरी जांच की सलाह</p>
+          </div>
+        </div>
+        <div class="offer-card">
+          <img src="./Image/Benifit2.png" class="w-36 h-36"  alt="Report" />
+          <div class="offer-body">
+            <div class="offer-num">02</div>
+            <h4>रिपोर्ट विश्लेषण</h4>
+            <p>विशेषज्ञ डॉक्टर द्वारा आपकी रिपोर्ट की विस्तृत समीक्षा</p>
+          </div>
+        </div>
+        <div class="offer-card">
+          <img src="./Image/Benifit3.png" class="w-36 h-36"  alt="Diet" />
+          <div class="offer-body">
+            <div class="offer-num">03</div>
+            <h4>Customized Diet Chart</h4>
+            <p>आपकी बीमारी व स्थिति के अनुसार आहार योजना</p>
+          </div>
+        </div>
+        <div class="offer-card">
+          <img src="./Image/Benifit4.png" class="w-36 h-38"  alt="Followup" />
+          <div class="offer-body">
+            <div class="offer-num">04</div>
+            <h4>Follow-up Support</h4>
+            <p>Consultation के बाद भी निरंतर मार्गदर्शन मिलता रहेगा</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- HOW IT WORKS -->
+    <div class="sec sec-white">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>कैसे काम करता है?</h2>
+        <p>5 आसान कदमों में संपूर्ण मार्गदर्शन</p>
+      </div>
+      <div class="rv">
+        <div class="step-wrap">
+          <div class="step-left">
+            <div class="step-circle">1</div>
+            <div class="step-vline"></div>
+          </div>
+          <div class="step-card">
+            <h4>फॉर्म भरें</h4>
+            <p>नाम, मोबाइल व अपनी समस्या बताएं — बस इतना काफी है</p>
+          </div>
+        </div>
+        <div class="step-wrap">
+          <div class="step-left">
+            <div class="step-circle">2</div>
+            <div class="step-vline"></div>
+          </div>
+          <div class="step-card">
+            <h4>हमारी टीम संपर्क करेगी</h4>
+            <p>जल्द ही आपसे बात होगी और Appointment fix होगा</p>
+          </div>
+        </div>
+        <div class="step-wrap">
+          <div class="step-left">
+            <div class="step-circle">3</div>
+            <div class="step-vline"></div>
+          </div>
+          <div class="step-card">
+            <h4>Doctor Consultation</h4>
+            <p>Specialist Doctor से फोन या वीडियो पर विस्तृत परामर्श</p>
+          </div>
+        </div>
+        <div class="step-wrap">
+          <div class="step-left">
+            <div class="step-circle">4</div>
+            <div class="step-vline"></div>
+          </div>
+          <div class="step-card">
+            <h4>रिपोर्ट व लक्षण समीक्षा</h4>
+            <p>Evidence Based Evaluation, Risk Assessment, Stage Identification</p>
+          </div>
+        </div>
+        <div class="step-wrap">
+          <div class="step-left">
+            <div class="step-circle">5</div>
+            <div class="step-vline" style="opacity:0"></div>
+          </div>
+          <div class="step-card">
+            <h4>Personalized Plan मिलेगा</h4>
+            <p>Diet Chart + Lifestyle Guidance + Follow-up सहित पूर्ण योजना</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- KEY APPROACH -->
+    <div class="sec sec-dark">
+      <div class="rv" style="text-align:center;margin-bottom:24px">
+        <h2 style="font-size:26px;color:white;margin-bottom:6px">🧪 हमारा कार्य करने का तरीका</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.55);font-weight:600">हम किसी चमत्कारी इलाज का दावा नहीं करते
+        </p>
+      </div>
+      <img src="./Image/key.png" class="rv"
+        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+        loading="lazy" />
+      <div class="rv app-grid">
+        <div class="app-card">
+          <div class="app-ico">🔬</div>
+          <h4>Evidence Based Evaluation</h4>
+          <p>वैज्ञानिक प्रमाण पर आधारित मूल्यांकन</p>
+        </div>
+        <div class="app-card">
+          <div class="app-ico">🩺</div>
+          <h4>Symptom Analysis</h4>
+          <p>लक्षणों की गहराई से जांच</p>
+        </div>
+        <div class="app-card">
+          <div class="app-ico">⚠️</div>
+          <h4>Risk Assessment</h4>
+          <p>आपकी स्थिति का जोखिम आकलन</p>
+        </div>
+        <div class="app-card">
+          <div class="app-ico">📊</div>
+          <h4>Stage Identification</h4>
+          <p>बीमारी की सटीक Stage पहचान</p>
+        </div>
+        <div class="app-card full">
+          <div class="app-ico">📋</div>
+          <h4>Personalized Guidance</h4>
+          <p>हर व्यक्ति की स्थिति अलग है — इसलिए हर व्यक्ति को अलग व्यक्तिगत योजना दी जाती है</p>
+        </div>
+      </div>
+      <div class="rv approach-note">
+        <strong>हर व्यक्ति की स्थिति अलग होती है —</strong>
+        <p>इसलिए हर व्यक्ति को अलग योजना की जरूरत होती है। हम अनुमान पर नहीं, बल्कि सटीक मेडिकल मूल्यांकन पर काम करते
+          हैं।</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CERTIFIED -->
+    <div class="sec sec-white">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>🏥 Certified &amp; Trusted</h2>
+        <p>आपके विश्वास की नींव — हमारी पारदर्शी प्रक्रिया</p>
+      </div>
+      <div class="rv cert-grid">
+        <div class="cert-card">
+           <img src="./Image/exprirense.png" class="rv"
+        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+        loading="lazy" />
+          <div class="cert-ico">👨‍⚕️</div>
+          <h4>अनुभवी विशेषज्ञ डॉक्टर</h4>
+          <p>वर्षों के अनुभव वाले Certified Specialists</p>
+        </div>
+        <div class="cert-card">
+           <img src="./Image/Clinical_Assessment.png" class="rv"
+        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+        loading="lazy" />
+          <div class="cert-ico">🔬</div>
+          <h4>Clinical Assessment</h4>
+          <p>Clinical जांच पर आधारित सटीक सलाह</p>
+        </div>
+        <div class="cert-card" >
+           <img src="./Image/Transparent_Process.png" class="rv"
+        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+        loading="lazy" />
+          <div class="cert-ico">🔍</div>
+          <h4>Transparent Process</h4>
+          <p>कोई छुपा शुल्क नहीं, पूर्ण पारदर्शिता</p>
+        </div>
+        <div class="cert-card">
+           <img src="./Image/privacy_protect.png" class="rv"
+        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+        loading="lazy" />
+          <div class="cert-ico">🔒</div>
+          <h4>Privacy Protected</h4>
+          <p>आपकी सभी जानकारी पूर्णतः सुरक्षित</p>
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- LIMITED SLOTS -->
+    <div class="sec" style="background:linear-gradient(135deg,#eff6ff,#e0f2fe)">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>🎁 Limited Consultation Slots</h2>
+        <p>सीमित स्लॉट बचे हैं — अभी बुक करें</p>
+      </div>
+      <div class="rv slots-card">
+        <div class="slots-badge">
+          <span
+            style="width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:blink 1.2s infinite;display:inline-block"></span>
+          सीमित समय ऑफर
+        </div>
+        <h3 style="font-size:22px;color:white;line-height:1.4;margin-bottom:12px">विशेषज्ञ डॉक्टर के साथ सीमित समय स्लॉट
+          उपलब्ध हैं</h3>
+        <p style="font-size:15px;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:4px">अगर आप या आपके परिवार में
+          कोई इन बीमारियों से जूझ रहा है — <span style="color:var(--cyan);font-weight:800">तो देरी न करें।</span></p>
+        <div class="slots-nums">
+          <div class="slot-num-box">
+            <div class="slot-n" id="cnt-slots">12</div>
+            <div class="slot-l">Slots बचे</div>
+          </div>
+          <div class="slot-num-box">
+            <div class="slot-n">24</div>
+            <div class="slot-l">घंटे Response</div>
+          </div>
+          <div class="slot-num-box">
+            <div class="slot-n">100%</div>
+            <div class="slot-l">Online</div>
+          </div>
+        </div>
+        <a href="#book" class="btn-white">📅 अभी Appointment बुक करें →</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BOOKING FORM -->
+    <div class="form-wrap" id="book">
+      <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=480&q=80"
+        style="width:100%;height:150px;object-fit:object-top;border-radius:18px;margin-bottom:28px" alt="Doctor"
+        loading="lazy" />
+      <div style="text-align:center;margin-bottom:28px">
+        <div
+          style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);padding:7px 16px;border-radius:30px;margin-bottom:14px">
+          <span
+            style="width:8px;height:8px;border-radius:50%;background:#10b981;animation:blink 1.2s infinite;display:inline-block"></span>
+          <span style="font-size:13px;font-weight:700;color:#6ee7b7">Online Slots Available</span>
+        </div>
+        <h2 style="font-size:26px;color:white;margin-bottom:8px">अभी Consultation बुक करें</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.55);font-weight:600">विशेषज्ञ डॉक्टर के साथ सीमित स्लॉट — देरी
+          न करें</p>
+      </div>
+
+      <div class="form-group">
+        <label>आपका पूरा नाम</label>
+        <input id="f-name" type="text" placeholder="नाम लिखें" />
+      </div>
+      <div class="form-group">
+        <label>मोबाइल नंबर</label>
+        <input id="f-phone" type="tel" placeholder="10 अंक का नंबर" maxlength="10" />
+      </div>
+      <div class="form-group">
+        <label>समस्या चुनें</label>
+        <div class="form-select-wrap">
+          <select id="f-dis" style="background:#0a1628">
+            <option value="">-- बीमारी चुनें --</option>
+            <option>Piles (बवासीर)</option>
+            <option>Kidney Stone (पथरी)</option>
+            <option>Diabetes (मधुमेह)</option>
+            <option>Heart Issue (हृदय रोग)</option>
+            <option>एक से अधिक समस्या</option>
+          </select>
+        </div>
+      </div>
+
+      <button onclick="bookNow()" class="btn-primary">
+        📞 Consultation Booking Request भेजें
+      </button>
+
+      <div id="s-msg">✅ धन्यवाद! हमारी टीम जल्द ही आपसे संपर्क करेगी।</div>
+
+      <p
+        style="font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin-top:16px;font-weight:600;line-height:1.7">
+        🔒 आपकी जानकारी पूरी तरह सुरक्षित है।<br />Individual results may vary. यह एक परामर्श सेवा है।
+      </p>
+    </div>
+
+    <!-- ═══ REVIEWS SECTION (NEW) ═══ -->
+    <div class="sec sec-light">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>मरीज़ों के अनुभव</h2>
+        <p>Real Patient Experiences — Individual results may vary</p>
+      </div>
+
+      <!-- Overall Rating Box -->
+      <div class="rv review-stats">
+        <div>
+          <div class="review-big-num">4.9</div>
+          <div style="font-size:12px;color:var(--blue2);font-weight:700;text-align:center;margin-top:2px">/ 5.0</div>
+        </div>
+        <div class="review-meta" style="flex:1">
+          <div class="stars">★★★★★</div>
+          <p>10,000+ समीक्षाओं पर आधारित</p>
+          <div class="review-bar-wrap">
+            <div class="review-bar-row">
+              <span>5★</span>
+              <div class="review-bar">
+                <div class="review-bar-fill" style="width:88%"></div>
+              </div>
+            </div>
+            <div class="review-bar-row">
+              <span>4★</span>
+              <div class="review-bar">
+                <div class="review-bar-fill" style="width:8%;opacity:.7"></div>
+              </div>
+            </div>
+            <div class="review-bar-row">
+              <span>3★</span>
+              <div class="review-bar">
+                <div class="review-bar-fill" style="width:3%;opacity:.5"></div>
+              </div>
+            </div>
+            <div class="review-bar-row">
+              <span>2★</span>
+              <div class="review-bar">
+                <div class="review-bar-fill" style="width:1%;opacity:.3"></div>
+              </div>
+            </div>
+            <div class="review-bar-row">
+              <span>1★</span>
+              <div class="review-bar">
+                <div class="review-bar-fill" style="width:1%;opacity:.2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Cards -->
+      <div class="review-grid">
+        <div class="rv review-card">
+          <div class="review-quote">"</div>
+          <p class="text">मुझे सालों से शुगर की समस्या थी। सही मार्गदर्शन मिलने के बाद अब बेहतर नियंत्रण में है और जीवन
+            बेहतर हो गया है। डॉक्टर ने जो Diet Plan दिया वो बहुत कारगर रहा।</p>
+          <div class="review-footer">
+            <img src="./Image/Client1.png" alt="Priya" />
+            <div>
+              <div class="name">Priya Sharma</div>
+              <div class="loc">Diabetes · Jaipur</div>
+              <div class="verified-badge">✔ Verified Patient</div>
+            </div>
+            <div class="review-stars-right">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="rv review-card">
+          <div class="review-quote">"</div>
+          <p class="text">पथरी को लेकर बहुत भ्रम था। डॉक्टर से सही सलाह मिलने के बाद स्थिति स्पष्ट हुई और सर्जरी से बच
+            गया। अब कोई तकलीफ नहीं।</p>
+          <div class="review-footer">
+            <img src="./Image/Client2.png" alt="Ramesh" />
+            <div>
+              <div class="name">Ramesh Gupta</div>
+              <div class="loc">Kidney Stone · Delhi</div>
+              <div class="verified-badge">✔ Verified Patient</div>
+            </div>
+            <div class="review-stars-right">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="rv review-card">
+          <div class="review-quote">"</div>
+          <p class="text">हार्ट रिस्क के बारे में समय रहते पता चल गया। Consultation ने सचमुच मेरी जान बचाई। अब नियमित
+            Follow-up भी मिलता है।</p>
+          <div class="review-footer">
+            <img src="./Image/Client3.png" alt="Suresh" />
+            <div>
+              <div class="name">Suresh Meena</div>
+              <div class="loc">Heart Issue · Jaipur</div>
+              <div class="verified-badge">✔ Verified Patient</div>
+            </div>
+            <div class="review-stars-right">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="rv review-card">
+          <div class="review-quote">"</div>
+          <p class="text">बवासीर की तकलीफ में इंटरनेट पर बहुत गलत जानकारी मिली थी। यहाँ असली विशेषज्ञ से बात हुई और सटीक
+            इलाज का रास्ता मिला।</p>
+          <div class="review-footer">
+            <img src="./Image/Client4.png" alt="Kavita" />
+            <div>
+              <div class="name">Kavita Yadav</div>
+              <div class="loc">Piles · Lucknow</div>
+              <div class="verified-badge">✔ Verified Patient</div>
+            </div>
+            <div class="review-stars-right">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <div class="sec sec-white">
+      <div class="rv sec-head">
+        <div class="sec-line"></div>
+        <h2>अक्सर पूछे जाने वाले प्रश्न</h2>
+        <p>आपके सवाल, हमारे जवाब</p>
+      </div>
+      <div class="rv">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>क्या यह इलाज है या सिर्फ सलाह?</span>
+            <div class="faq-ico">+</div>
+          </div>
+          <div class="faq-body">यह विशेषज्ञ डॉक्टर द्वारा मेडिकल परामर्श सेवा है। इलाज की सही दिशा में मार्गदर्शन मिलता
+            है।</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>क्या बिना रिपोर्ट के Appointment मिलेगा?</span>
+            <div class="faq-ico">+</div>
+          </div>
+          <div class="faq-body">हाँ। डॉक्टर आपकी स्थिति के अनुसार आवश्यक जांच की सलाह देंगे।</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>क्या Consultation ऑनलाइन होती है?</span>
+            <div class="faq-ico">+</div>
+          </div>
+          <div class="faq-body">हाँ, फोन या वीडियो कॉल के माध्यम से पूरी Consultation होती है।</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>क्या यह सर्जरी का विकल्प है?</span>
+            <div class="faq-ico">+</div>
+          </div>
+          <div class="faq-body">डॉक्टर Stage व स्थिति देखकर उचित मार्गदर्शन देंगे। जरूरत हो तो सही Referral भी मिलेगा।
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Consultation की फीस क्या है?</span>
+            <div class="faq-ico">+</div>
+          </div>
+          <div class="faq-body">फॉर्म भरने के बाद हमारी टीम आपसे संपर्क कर सभी जानकारी देगी। कोई छुपा शुल्क नहीं।</div>
+        </div>
+      </div>
+    </div>    
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="f-logo">✚ MediCare विशेषज्ञ परामर्श</div>
+      <p>यह एक मेडिकल परामर्श सेवा है। किसी भी आपात स्थिति में<br />तुरंत नजदीकी डॉक्टर से संपर्क करें।</p>
+      <div class="f-bottom">© 2025 · Privacy Protected · Evidence Based · Certified Doctors</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const l = document.getElementById('loader');
+        l.style.opacity = '0'; l.style.visibility = 'hidden';
+      }, 1800);
+    });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+    // FAQ
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const isOpen = item.classList.contains('faq-open');
+      document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('faq-open'));
+      if (!isOpen) item.classList.add('faq-open');
+    }
+
+    // Slots countdown
+    let slots = 12;
+    setInterval(() => {
+      const el = document.getElementById('cnt-slots');
+      if (el && slots > 6) { slots--; el.textContent = slots; }
+    }, 9000);
+
+    // Disease configurations
+    const diseaseConfigs = [
+      { id: 'dis-diabetes', displayId: 'vd', color1: '#d97706', color2: '#f59e0b' },
+      { id: 'dis-heart', displayId: 'vh', color1: '#dc2626', color2: '#ef4444' },
+      { id: 'dis-kidney', displayId: 'vk', color1: '#1d4ed8', color2: '#3b82f6' },
+      { id: 'dis-piles', displayId: 'vp', color1: '#6d28d9', color2: '#8b5cf6' }
+    ];
+
+    // ── ANALYSIS ENGINE — score = sum ÷ number of touched sliders
+    function updateAnalysis() {
+      const vals  = diseaseConfigs.map(c => parseInt(document.getElementById(c.id).value));
+      const count = vals.filter(v => v > 0).length;
+      const sum   = vals.reduce((a, b) => a + b, 0);
+      const score = count > 0 ? Math.round(sum / count) : 0;
+
+      document.getElementById('selectedCount').textContent = count;
+      document.getElementById('healthScore').textContent   = score + '%';
+
+      let category, days;
+      if (score === 0 || count === 0) { category = ''; days = 0; }
+      else if (score < 25) { category = 'Healthy';         days = Math.round(90 - score * 2); }
+      else if (score < 50) { category = 'Mild Concern';    days = Math.round(60 - score); }
+      else if (score < 75) { category = 'Needs Attention'; days = Math.max(1, Math.round(30 - score * 0.3)); }
+      else                 { category = 'High Concern';    days = 0; }
+
+      const catEl = document.getElementById('category');
+      catEl.textContent = category || '—';
+
+      if (category) {
+      updateResultBoxColors(category);
+      document.getElementById('alertText').textContent = getAlertText(category);
+      document.getElementById('message').textContent   = getMessage(category, days);
+      } else {
+      const rb = document.getElementById('resultBox');
+      rb.style.background   = 'linear-gradient(135deg,#f8fafc,#f1f5f9)';
+      rb.style.borderColor  = '#e2e8f0';
+      catEl.style.background = '#e2e8f0'; catEl.style.color = '#64748b';
+      document.getElementById('alertText').textContent = '';
+      document.getElementById('message').textContent   = '🔍 ऊपर किसी भी बीमारी का slider move करें — score automatically calculate होगा';
+      document.getElementById('healthScore').style.color  = '#2563eb';
+      document.getElementById('selectedCount').style.color = '#2563eb';
+      }
+      }
+
+     function updateResultBoxColors(category) {
+      const box  = document.getElementById('resultBox');
+      const cat  = document.getElementById('category');
+      const hs   = document.getElementById('healthScore');
+      const sc   = document.getElementById('selectedCount');
+      
+      const styles = {
+        "Healthy": {
+          boxBg: 'linear-gradient(135deg,#f0fdf4,#dcfce7)',
+          boxBorder: '#86efac',
+          catBg: 'linear-gradient(135deg,#22c55e,#16a34a)',
+          catColor: '#ffffff',
+          scoreColor: '#16a34a'
+        },
+        "Mild Concern": {
+          boxBg: 'linear-gradient(135deg,#fffbeb,#fef3c7)',
+          boxBorder: '#fcd34d',
+          catBg: 'linear-gradient(135deg,#f59e0b,#d97706)',
+          catColor: '#ffffff',
+          scoreColor: '#d97706'
+        },
+        "Needs Attention": {
+          boxBg: 'linear-gradient(135deg,#fff7ed,#ffedd5)',
+          boxBorder: '#fb923c',
+          catBg: 'linear-gradient(135deg,#f97316,#ea580c)',
+          catColor: '#ffffff',
+          scoreColor: '#ea580c'
+        },
+        "High Concern": {
+          boxBg: 'linear-gradient(135deg,#fef2f2,#fee2e2)',
+          boxBorder: '#f87171',
+          catBg: 'linear-gradient(135deg,#ef4444,#dc2626)',
+          catColor: '#ffffff',
+          scoreColor: '#dc2626'
+        }
+      };
+      
+      const style = styles[category];
+      if (style) {
+        box.style.background = style.boxBg;
+        box.style.borderColor = style.boxBorder;
+        cat.style.background = style.catBg;
+        cat.style.color = style.catColor;
+        hs.style.color = style.scoreColor;
+        sc.style.color = style.scoreColor;
+      }
+    }
+
+    function getAlertText(cat) {
+      return { "Healthy":"✅ आपकी स्थिति नियंत्रण में है", "Mild Concern":"⚠️ कुछ हल्की परेशानियाँ दिख रही हैं", "Needs Attention":"🔶 ध्यान देने की ज़रूरत है", "High Concern":"🚨 तुरंत देखभाल लेना ज़रूरी है" }[cat] || '';
+    }
+
+    function getMessage(category, days) {
+      if (days === 0 || category === "High Concern") {
+        return `⚠ आपकी स्वास्थ्य स्थिति तुरंत ध्यान देने योग्य है। कृपया देरी न करें — अभी विशेषज्ञ से परामर्श लें।`;
+      }
+      return {
+        "Healthy":        `आपकी स्वास्थ्य स्थिति अभी control में है। Safe zone में लगभग ${days} दिन बाकी हैं।`,
+        "Mild Concern":   `कुछ हल्की स्वास्थ्य परेशानियाँ दिख रही हैं। अगर सही देखभाल नहीं ली तो लगभग ${days} दिनों में स्थिति खराब हो सकती है।`,
+        "Needs Attention":`Noticeable स्वास्थ्य समस्याएँ मौजूद हैं। आपके पास लगभग ${days} दिन हैं — अभी विशेषज्ञ परामर्श लें।`,
+      }[category] || '';
+    }
+
+    // Initialize sliders with event listeners
+    diseaseConfigs.forEach(config => {
+      const slider = document.getElementById(config.id);
+      const display = document.getElementById(config.displayId);
+      
+      slider.addEventListener('input', function() {
+        const value = this.value;
+        display.textContent = value + '%';
+        
+        // Update slider gradient
+        const percent = (value / 100) * 100;
+        this.style.background = `linear-gradient(to right, ${config.color1} 0%, ${config.color2} ${percent}%, #e2e8f0 ${percent}%, #e2e8f0 100%)`;
+        
+        // Update analysis
+        updateAnalysis();
+      });
+    });
+
+    // Form
+    function bookNow() {
+      const n = document.getElementById('f-name').value.trim();
+      const p = document.getElementById('f-phone').value.trim();
+      const d = document.getElementById('f-dis').value;
+      if (!n || !p || !d) { alert('कृपया सभी जानकारी भरें।'); return; }
+      if (p.length !== 10 || isNaN(p)) { alert('कृपया सही 10 अंकों का मोबाइल नंबर डालें।'); return; }
+      document.getElementById('s-msg').style.display = 'block';
+      document.getElementById('f-name').value = '';
+      document.getElementById('f-phone').value = '';
+      document.getElementById('f-dis').value = '';
+      setTimeout(() => document.getElementById('s-msg').style.display = 'none', 6000);
+    }
+  </script>
+</body>
+
+</html>
