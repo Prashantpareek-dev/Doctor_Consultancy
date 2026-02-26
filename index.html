@@ -8,7 +8,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
       --navy: #0a1628;
@@ -586,7 +587,7 @@
       box-shadow: 0 8px 28px rgba(26, 86, 219, .12);
     }
 
-    
+
 
     .offer-body {
       padding: 18px;
@@ -713,7 +714,7 @@
       width: 40px;
       height: 40px;
       border-radius: 12px;
-      background: rgba(59, 130, 246, .2);
+      background: rgba(238, 240, 243, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -723,13 +724,13 @@
     .app-card h4 {
       font-size: 15px;
       font-weight: 800;
-      color: var(--cyan);
+      color: var(--gold);
       line-height: 1.3;
     }
 
     .app-card p {
       font-size: 13px;
-      color: rgba(255, 255, 255, .55);
+      color: rgba(255, 255, 255);
       font-weight: 600;
     }
 
@@ -744,14 +745,14 @@
     .approach-note strong {
       display: block;
       font-size: 16px;
-      color: #a5f3fc;
+      color: var(--gold);
       margin-bottom: 4px;
       font-weight: 800;
     }
 
     .approach-note p {
       font-size: 14px;
-      color: rgba(255, 255, 255, .65);
+      color: rgb(255, 255, 255);
       font-weight: 600;
     }
 
@@ -873,13 +874,13 @@
       font-family: 'Playfair Display', serif;
       font-size: 30px;
       font-weight: 900;
-      color: var(--cyan);
+      color: var(--gold);
       line-height: 1;
     }
 
     .slot-l {
       font-size: 11px;
-      color: rgba(255, 255, 255, .45);
+      color: rgb(255, 255, 255);
       margin-top: 4px;
       font-weight: 700;
     }
@@ -1116,7 +1117,7 @@
       display: block;
       font-size: 13px;
       font-weight: 700;
-      color: rgba(255, 255, 255, .6);
+      color: rgb(255, 255, 255);
       margin-bottom: 8px;
       letter-spacing: .5px;
     }
@@ -1124,8 +1125,8 @@
     .form-wrap input,
     .form-wrap select {
       width: 100%;
-      background: rgba(255, 255, 255, .08);
-      border: 1.5px solid rgba(255, 255, 255, .18);
+      background: rgba(255, 255, 255,0.2);
+      border: 1.5px solid rgba(255, 255, 255, .9);
       border-radius: 14px;
       padding: 14px 18px;
       color: white;
@@ -1143,7 +1144,7 @@
     }
 
     .form-wrap input::placeholder {
-      color: rgba(255, 255, 255, .3);
+      color: rgba(255, 255, 255, .8);
     }
 
     .form-group {
@@ -1404,7 +1405,159 @@
       transform: translateY(0);
     }
 
-  
+    /* ── DOCTOR SWIPER ── */
+    .doctorSwiper {
+      width: 100%;
+      padding: 20px 0 60px !important;
+      overflow: visible !important;
+    }
+
+    .doctorSwiper .swiper-slide {
+      width: 300px;
+      height: auto;
+    }
+
+    .doctor-card {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .4);
+      transition: transform .3s;
+      height: 100%;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .doc-photo-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .doc-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform .5s;
+    }
+
+    .doctor-card:hover .doc-photo {
+      transform: scale(1.05);
+    }
+
+    .doc-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 22, 40, .9) 0%, rgba(10, 22, 40, .2) 60%, transparent 100%);
+    }
+
+    .doc-verified {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #10b981;
+      background: rgba(16, 185, 129, .15);
+      border: 1px solid rgba(16, 185, 129, .4);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .doc-info {
+      padding: 18px 18px 20px;
+    }
+
+    .doc-specialty-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #06b6d4;
+      background: rgba(6, 182, 212, .12);
+      border: 1px solid rgba(6, 182, 212, .25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      letter-spacing: .3px;
+    }
+
+    .doc-name {
+      font-family: "Playfair Display", serif;
+      font-size: 19px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .doc-degree {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgb(255, 255, 255);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .doc-stats {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .doc-stat {
+      flex: 1;
+      text-align: center;
+      padding: 10px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .doc-stat-num {
+      font-family: "Playfair Display", serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .doc-stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: rgb(255, 255, 255);
+    }
+
+    .doc-stat-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255, 255, 255, .1);
+      flex-shrink: 0;
+    }
+
+    /* Swiper Pagination */
+    .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, .4) !important;
+      opacity: 1 !important;
+      width: 8px;
+      height: 8px;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #3b82f6 !important;
+      width: 24px !important;
+      border-radius: 4px !important;
+    }
   </style>
 </head>
 
@@ -1432,96 +1585,115 @@
       </div>
       <span class="topbar-badge">⚕ Verified Doctors</span>
     </div>
-    
+
+    <img src="./Image/doctors.png" alt="">
+
     <!-- ══════════ HERO SECTION ══════════ -->
-    <section class="relative min-h-screen overflow-hidden dot-grid" style="background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 58, 95, 0.8) 50%, rgba(15, 23, 42, 1) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1080&q=80'); background-position:center; background-size:cover;">
-      
+    <section class="relative min-h-screen overflow-hidden dot-grid"
+      style="background-image: linear-gradient(160deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 58, 95, 0.8) 50%, rgba(15, 23, 42, 1) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1080&q=80'); background-position:center; background-size:cover;">
+
       <!-- Ambient glows -->
-      <div class="absolute top-10 left-[-60px] w-64 h-64 rounded-full opacity-20" style="background:radial-gradient(circle,#2563eb,transparent)"></div>
-      <div class="absolute bottom-20 right-[-40px] w-48 h-48 rounded-full opacity-15" style="background:radial-gradient(circle,#06b6d4,transparent)"></div>
-      
+      <div class="absolute top-10 left-[-60px] w-64 h-64 rounded-full opacity-20"
+        style="background:radial-gradient(circle,#2563eb,transparent)"></div>
+      <div class="absolute bottom-20 right-[-40px] w-48 h-48 rounded-full opacity-15"
+        style="background:radial-gradient(circle,#06b6d4,transparent)"></div>
+
       <div class="relative px-5 py-4">
-      <!-- <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=480&q=80" alt="Doctor"
+        <!-- <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=480&q=80" alt="Doctor"
       class="hero-img" /> -->
 
-      <!-- Live badge -->
-      <div class="anim-fadeUp flex items-center gap-2 self-start mb-6 inline-flex">
-        <span class="flex items-center gap-2 text-xs font-bold text-cyan-300 bg-cyan-400/10 border border-cyan-400/25 px-3 py-1.5 rounded-full">
-          <span class="w-2 h-2 rounded-full bg-cyan-400 anim-blink inline-block"></span>
-          🩺 Expert Medical Information
-        </span>
+        <!-- Live badge -->
+        <div class="anim-fadeUp flex items-center gap-2 self-start mb-6 inline-flex">
+          <span
+            class="flex items-center gap-2 text-xs font-bold text-cyan-300 bg-cyan-400/10 border border-cyan-400/25 px-3 py-1.5 rounded-full">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 anim-blink inline-block"></span>
+            🩺 Expert Medical Information
+          </span>
+        </div>
+
+        <!-- Main headline -->
+        <h1 class="anim-fadeUp3 text-3xl font-black text-white leading-tight mb-7"
+          style="font-family:'Playfair Display',serif">
+          भारत में लाखों लोग <span
+            style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Diabetes,
+            Heart Disease, Kidney Stone</span> और <span
+            style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Piles</span>
+          जैसी बीमारियों और <span style="color:#fbbf24">लाखो पैसे खर्च</span> करने के बाद भी जूझ रहे हैं — लेकिन असली
+          खतरा बीमारी से ज्यादा, उसके बारे में फैली <span
+            style="background:linear-gradient(135deg,#ef4444,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">गलत
+            जानकारी</span> है।
+        </h1>
+
+        <!-- Intro para -->
+        <p class="anim-fadeUp2 text-xl text-white leading-relaxed mb-4 font-bold">
+          🚨 क्या <span
+            style="background:linear-gradient(135deg,#ef4444,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">गलत
+            जानकारी</span> आपकी <span style="color:#fbbf24">बीमारी</span> को और <span style="color:#f87171">गंभीर</span>
+          बना रही है?
+        </p>
+
+
+        <!-- Myths grid -->
+        <div class="anim-fadeUp4 grid grid-cols-2 gap-2 mb-6">
+          <div class="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/25 rounded-xl p-3">
+            <span class="text-yellow-400 text-base flex-shrink-0">❌</span>
+            <span class="text-base text-yellow-300 font-bold leading-snug">"7 दिन में जड़ से खत्म"</span>
+          </div>
+          <div class="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/25 rounded-xl p-3">
+            <span class="text-yellow-400 text-base flex-shrink-0">❌</span>
+            <span class="text-base text-yellow-300 font-bold leading-snug">"डॉक्टर के महंगे इलाज"</span>
+          </div>
+          <div class="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/25 rounded-xl p-3">
+            <span class="text-yellow-400 text-base flex-shrink-0">❌</span>
+            <span class="text-base text-yellow-300 font-bold leading-snug">"सिर्फ सर्जरी से ही होगा इलाज"</span>
+          </div>
+          <div class="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/25 rounded-xl p-3">
+            <span class="text-yellow-400 text-base flex-shrink-0">❌</span>
+            <span class="text-base text-yellow-300 font-bold leading-snug">"घरेलू तेल से 3 दिन में गायब"</span>
+          </div>
+        </div>
+
+        <!-- Truth box -->
+        <div class="rv bg-amber-500/10 border border-amber-400/30 rounded-2xl p-4 mb-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-amber-400 text-lg">⚠️</span>
+            <span class="text-amber-300 font-bold text-lg">सच्चाई यह है:</span>
+          </div>
+          <ul class="space-y-2">
+            <li class="flex items-start gap-2 text-base text-white font-semibold leading-relaxed">
+              <span class="text-blue-400 font-black mt-0.5">›</span>
+              ज़रूरत से ज्यादा शुगर दिल और किडनी को प्रभावित कर सकती है।
+            </li>
+            <li class="flex items-start gap-2 text-base text-white font-semibold leading-relaxed">
+              <span class="text-blue-400 font-black mt-0.5">›</span>
+              छोटी पथरी Infection में बदल सकती है।
+            </li>
+            <li class="flex items-start gap-2 text-base text-white font-semibold leading-relaxed">
+              <span class="text-blue-400 font-black mt-0.5">›</span>
+              लंबे समय की बवासीर गंभीर स्टेज तक जा सकती है।
+            </li>
+            <li class="flex items-start gap-2 text-base text-white font-semibold leading-relaxed">
+              <span class="text-blue-400 font-black mt-0.5">›</span>
+              नजरअंदाज किया गया हार्ट ब्लॉकेज जानलेवा साबित हो सकता है।
+            </li>
+          </ul>
+        </div>
+
+        <!-- CTA wisdom -->
+        <div class="rv bg-blue-600/15 border border-blue-500/25 rounded-2xl p-4 mb-7">
+          <p class="text-lg text-blue-100 font-bold mb-1">🧠 अब समय है सही और वैज्ञानिक जानकारी जानने का।</p>
+          <p class="text-base text-white font-semibold leading-relaxed">ना डर फैलाना। ना झूठे वादे। जो सच है, वही
+            जानकारी।</p>
+        </div>
+
+        <!-- Read more CTA -->
+        <a href="#diseases"
+          class="rv btn-shine w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold text-white text-lg transition-all hover:scale-[1.02]"
+          style="background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 8px 28px rgba(37,99,235,.45)">
+          👉 आगे पढ़ें और समझें →
+        </a>
       </div>
-
-      <!-- Main headline -->
-      <h1 class="anim-fadeUp3 text-3xl font-black text-white leading-tight mb-7" style="font-family:'Playfair Display',serif">
-        भारत में लाखों लोग <span style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Diabetes, Heart Disease, Kidney Stone</span> और <span style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Piles</span> जैसी बीमारियों और <span style="color:#fbbf24">लाखो पैसे खर्च</span> करने के बाद भी जूझ रहे हैं — लेकिन असली खतरा बीमारी से ज्यादा, उसके बारे में फैली <span style="background:linear-gradient(135deg,#ef4444,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">गलत जानकारी</span> है।
-      </h1> 
-
-      <!-- Intro para -->
-      <p class="anim-fadeUp2 text-xl text-white leading-relaxed mb-4 font-bold">
-        🚨 क्या <span style="background:linear-gradient(135deg,#ef4444,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">गलत जानकारी</span> आपकी <span style="color:#fbbf24">बीमारी</span> को और <span style="color:#f87171">गंभीर</span> बना रही है?
-      </p>
-
-
-      <!-- Myths grid -->
-      <div class="anim-fadeUp4 grid grid-cols-2 gap-2 mb-6">
-        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
-          <span class="text-red-400 text-base flex-shrink-0">❌</span>
-          <span class="text-base text-red-300 font-bold leading-snug">"7 दिन में जड़ से खत्म"</span>
-        </div>
-        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
-          <span class="text-red-400 text-base flex-shrink-0">❌</span>
-          <span class="text-base text-red-300 font-bold leading-snug">"डॉक्टर के महंगे इलाज"</span>
-        </div>
-        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
-          <span class="text-red-400 text-base flex-shrink-0">❌</span>
-          <span class="text-base text-red-300 font-bold leading-snug">"सिर्फ सर्जरी से ही होगा इलाज"</span>
-        </div>
-        <div class="flex items-start gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-3">
-          <span class="text-red-400 text-base flex-shrink-0">❌</span>
-          <span class="text-base text-red-300 font-bold leading-snug">"घरेलू तेल से 3 दिन में गायब"</span>
-        </div>
-      </div>
-
-      <!-- Truth box -->
-      <div class="rv bg-amber-500/10 border border-amber-400/30 rounded-2xl p-4 mb-6">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-amber-400 text-lg">⚠️</span>
-          <span class="text-amber-300 font-bold text-lg">सच्चाई यह है:</span>
-        </div>
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
-            <span class="text-blue-400 font-black mt-0.5">›</span>
-            ज़रूरत से ज्यादा शुगर दिल और किडनी को प्रभावित कर सकती है।
-          </li>
-          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
-            <span class="text-blue-400 font-black mt-0.5">›</span>
-            छोटी पथरी Infection में बदल सकती है।
-          </li>
-          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
-            <span class="text-blue-400 font-black mt-0.5">›</span>
-            लंबे समय की बवासीर गंभीर स्टेज तक जा सकती है।
-          </li>
-          <li class="flex items-start gap-2 text-base text-white/75 font-semibold leading-relaxed">
-            <span class="text-blue-400 font-black mt-0.5">›</span>
-            नजरअंदाज किया गया हार्ट ब्लॉकेज जानलेवा साबित हो सकता है।
-          </li>
-        </ul>
-      </div>
-
-      <!-- CTA wisdom -->
-      <div class="rv bg-blue-600/15 border border-blue-500/25 rounded-2xl p-4 mb-7">
-        <p class="text-lg text-blue-200 font-bold mb-1">🧠 अब समय है सही और वैज्ञानिक जानकारी जानने का।</p>
-        <p class="text-base text-white/60 font-semibold leading-relaxed">ना डर फैलाना। ना झूठे वादे। जो सच है, वही जानकारी।</p>
-      </div>
-
-      <!-- Read more CTA -->
-      <a href="#diseases" class="rv btn-shine w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold text-white text-lg transition-all hover:scale-[1.02]"
-         style="background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 8px 28px rgba(37,99,235,.45)">
-        👉 आगे पढ़ें और समझें →
-      </a>
-    </div>
-  </section>
+    </section>
 
     <!-- STATS -->
     <div class="stats rv">
@@ -1557,61 +1729,61 @@
       </div>
 
       <div class="disease-cards-wrapper">
-      <div class="rv dis-card">
-        <img src="./Image/Problem1.png" alt="Piles" />
-        <div class="dis-card-body">
-          <div class="dis-badge piles">🍑 Piles · बवासीर</div>
-          <h3>बवासीर की समस्या</h3>
-          <div class="tag-wrap">
-            <span class="tag">मल में खून</span>
-            <span class="tag">बैठने में दर्द</span>
-            <span class="tag">लंबी कब्ज</span>
-            <span class="tag">जलन व सूजन</span>
+        <div class="rv dis-card">
+          <img src="./Image/Problem1.png" alt="Piles" />
+          <div class="dis-card-body">
+            <div class="dis-badge piles">🍑 Piles · बवासीर</div>
+            <h3>बवासीर की समस्या</h3>
+            <div class="tag-wrap">
+              <span class="tag">मल में खून</span>
+              <span class="tag">बैठने में दर्द</span>
+              <span class="tag">लंबी कब्ज</span>
+              <span class="tag">जलन व सूजन</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="rv dis-card">
-        <img src="./Image/Problem2.png" alt="Kidney" />
-        <div class="dis-card-body">
-          <div class="dis-badge kidney">🪨 Kidney Stone · पथरी</div>
-          <h3>किडनी की पथरी</h3>
-          <div class="tag-wrap">
-            <span class="tag">कमर में दर्द</span>
-            <span class="tag">पेशाब में जलन</span>
-            <span class="tag">Infection</span>
-            <span class="tag">उल्टी-मतली</span>
+        <div class="rv dis-card">
+          <img src="./Image/Problem2.png" alt="Kidney" />
+          <div class="dis-card-body">
+            <div class="dis-badge kidney">🪨 Kidney Stone · पथरी</div>
+            <h3>किडनी की पथरी</h3>
+            <div class="tag-wrap">
+              <span class="tag">कमर में दर्द</span>
+              <span class="tag">पेशाब में जलन</span>
+              <span class="tag">Infection</span>
+              <span class="tag">उल्टी-मतली</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="rv dis-card">
-        <img src="./Image/Problem3.png" alt="Diabetes" />
-        <div class="dis-card-body">
-          <div class="dis-badge diabetes">🩸 Diabetes · मधुमेह</div>
-          <h3>मधुमेह (शुगर)</h3>
-          <div class="tag-wrap">
-            <span class="tag">बार-बार प्यास</span>
-            <span class="tag">घाव देर से भरना</span>
-            <span class="tag">अत्यधिक थकान</span>
-            <span class="tag">धुंधली दृष्टि</span>
+        <div class="rv dis-card">
+          <img src="./Image/Problem3.png" alt="Diabetes" />
+          <div class="dis-card-body">
+            <div class="dis-badge diabetes">🩸 Diabetes · मधुमेह</div>
+            <h3>मधुमेह (शुगर)</h3>
+            <div class="tag-wrap">
+              <span class="tag">बार-बार प्यास</span>
+              <span class="tag">घाव देर से भरना</span>
+              <span class="tag">अत्यधिक थकान</span>
+              <span class="tag">धुंधली दृष्टि</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="rv dis-card">
-        <img src="./Image/Problem4.png" alt="Heart" />
-        <div class="dis-card-body">
-          <div class="dis-badge heart">❤️ Heart · हृदय</div>
-          <h3>हृदय रोग</h3>
-          <div class="tag-wrap">
-            <span class="tag">सीने में जकड़न</span>
-            <span class="tag">सांस फूलना</span>
-            <span class="tag">हाई BP</span>
-            <span class="tag">अनियमित धड़कन</span>
+        <div class="rv dis-card">
+          <img src="./Image/Problem4.png" alt="Heart" />
+          <div class="dis-card-body">
+            <div class="dis-badge heart">❤️ Heart · हृदय</div>
+            <h3>हृदय रोग</h3>
+            <div class="tag-wrap">
+              <span class="tag">सीने में जकड़न</span>
+              <span class="tag">सांस फूलना</span>
+              <span class="tag">हाई BP</span>
+              <span class="tag">अनियमित धड़कन</span>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
 
@@ -1623,153 +1795,174 @@
       <span class="trust-chip">⭐ Certified Doctors</span>
     </div> -->
 
-        <!-- ══════════ ANALYSIS SECTION ══════════ -->
-  <section class="py-4 px-4" id="analysis"
-    style="background:linear-gradient(160deg,#eff6ff 0%,#e0f2fe 60%,#eff6ff 100%)">
+    <!-- ══════════ ANALYSIS SECTION ══════════ -->
+    <section class="py-4 px-4" id="analysis"
+      style="background:linear-gradient(160deg,#eff6ff 0%,#e0f2fe 60%,#eff6ff 100%)">
 
-    <div class="rv text-center mb-8">
-      <div class="w-10 h-1 rounded-full mx-auto mb-4" style="background:linear-gradient(90deg,#2563eb,#06b6d4)"></div>
-      <h2 class="text-2xl font-black text-slate-900 mb-2">स्वास्थ्य विश्लेषण करें</h2>
-      <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी के लक्षणों की severity slide करके जानें</p>
-    </div>
+      <!-- <div class="rv text-center mb-8">
+        <div class="w-10 h-1 rounded-full mx-auto mb-4" style="background:linear-gradient(90deg,#2563eb,#06b6d4)"></div>
+        <h2 class="text-2xl font-black text-slate-900 mb-2">स्वास्थ्य विश्लेषण करें</h2>
+        <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी के लक्षणों की severity slide करके जानें</p>
+      </div> -->
 
-    <!-- MAIN CARD — vertical list layout like screenshot -->
-    <div class="rv max-w-xl mx-auto rounded-3xl overflow-hidden"
-         style="background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border:1px solid #e0eaff;box-shadow:0 20px 60px rgba(37,99,235,.18)">
+      <!-- MAIN CARD — vertical list layout like screenshot -->
+      <div class="rv max-w-xl mx-auto rounded-3xl overflow-hidden"
+        style="background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border:1px solid #e0eaff;box-shadow:0 20px 60px rgba(37,99,235,.18)">
 
-      <!-- Card Header -->
-      <div class="px-7 pt-7 pb-5 text-center" style="background:linear-gradient(135deg,#f0f6ff,#ffffff)">
-        <div class="flex items-center justify-center gap-3 mb-2">
-          <span class="text-3xl">🩺</span>
-          <h3 class="text-2xl font-black" style="background:linear-gradient(135deg,#2563eb,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Health Analysis</h3>
-        </div>
-        <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी की severity नीचे slide करें</p>
-      </div>
-
-      <div class="h-px mx-0" style="background:linear-gradient(to right,transparent,#bfdbfe,transparent)"></div>
-
-      <!-- SLIDERS LIST -->
-      <div class="px-6 pt-6 pb-3 space-y-8">
-
-        <!-- DIABETES -->
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
-              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🩸</span>
-              <span>Diabetes (मधुमेह):</span>
-            </label>
-            <span id="vd" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#d97706,#f59e0b)">0%</span>
+        <!-- Card Header -->
+        <div class="px-7 pt-7 pb-5 text-center" style="background:linear-gradient(135deg,#f0f6ff,#ffffff)">
+          <div class="flex items-center justify-center gap-3 mb-2">
+            <span class="text-3xl">🩺</span>
+            <h3 class="text-2xl font-black"
+              style="background:linear-gradient(135deg,#2563eb,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+              Health Analysis</h3>
           </div>
-          <input type="range" id="dis-diabetes" min="0" max="100" value="0" class="w-full modern-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)"/>
+          <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी की severity नीचे slide करें</p>
         </div>
 
-        <!-- HEART DISEASE -->
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
-              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">❤️</span>
-              <span>Heart Disease (हृदय):</span>
-            </label>
-            <span id="vh" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#dc2626,#ef4444)">0%</span>
+        <div class="h-px mx-0" style="background:linear-gradient(to right,transparent,#bfdbfe,transparent)"></div>
+
+        <!-- SLIDERS LIST -->
+        <div class="px-6 pt-6 pb-3 space-y-8">
+
+          <!-- DIABETES -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+                <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
+                  style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🩸</span>
+                <span>Diabetes (मधुमेह):</span>
+              </label>
+              <span id="vd" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center"
+                style="background:linear-gradient(135deg,#d97706,#f59e0b)">0%</span>
+            </div>
+            <input type="range" id="dis-diabetes" min="0" max="100" value="0" class="w-full modern-slider"
+              style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)" />
           </div>
-          <input type="range" id="dis-heart" min="0" max="100" value="0" class="w-full modern-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)" data-c1="#dc2626" data-c2="#ef4444"/>
-        </div>
 
-        <!-- KIDNEY STONE -->
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
-              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🪨</span>
-              <span>Kidney Stone (पथरी):</span>
-            </label>
-            <span id="vk" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">0%</span>
+          <!-- HEART DISEASE -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+                <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
+                  style="background:linear-gradient(135deg,#fee2e2,#fecaca)">❤️</span>
+                <span>Heart Disease (हृदय):</span>
+              </label>
+              <span id="vh" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center"
+                style="background:linear-gradient(135deg,#dc2626,#ef4444)">0%</span>
+            </div>
+            <input type="range" id="dis-heart" min="0" max="100" value="0" class="w-full modern-slider"
+              style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)" data-c1="#dc2626"
+              data-c2="#ef4444" />
           </div>
-          <input type="range" id="dis-kidney" min="0" max="100" value="0" class="w-full modern-slider kidney-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)"/>
-        </div>
 
-        <!-- PILES -->
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <label class="flex items-center gap-3 font-black text-slate-700 text-base">
-              <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">🍑</span>
-              <span>Piles (बवासीर):</span>
-            </label>
-            <span id="vp" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center" style="background:linear-gradient(135deg,#6d28d9,#8b5cf6)">0%</span>
+          <!-- KIDNEY STONE -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+                <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
+                  style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🪨</span>
+                <span>Kidney Stone (पथरी):</span>
+              </label>
+              <span id="vk" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center"
+                style="background:linear-gradient(135deg,#1d4ed8,#3b82f6)">0%</span>
+            </div>
+            <input type="range" id="dis-kidney" min="0" max="100" value="0" class="w-full modern-slider kidney-slider"
+              style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)" />
           </div>
-          <input type="range" id="dis-piles" min="0" max="100" value="0" class="w-full modern-slider piles-slider" style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)"/>
+
+          <!-- PILES -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <label class="flex items-center gap-3 font-black text-slate-700 text-base">
+                <span class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
+                  style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">🍑</span>
+                <span>Piles (बवासीर):</span>
+              </label>
+              <span id="vp" class="text-sm font-black text-white px-3 py-1 rounded-lg min-w-[52px] text-center"
+                style="background:linear-gradient(135deg,#6d28d9,#8b5cf6)">0%</span>
+            </div>
+            <input type="range" id="dis-piles" min="0" max="100" value="0" class="w-full modern-slider piles-slider"
+              style="background:linear-gradient(to right,#e2e8f0 0%,#e2e8f0 100%)" />
+          </div>
+
         </div>
 
-      </div>
+        <!-- Divider -->
+        <div class="h-px mx-6 mt-4" style="background:linear-gradient(to right,transparent,#bfdbfe,transparent)"></div>
 
-      <!-- Divider -->
-      <div class="h-px mx-6 mt-4" style="background:linear-gradient(to right,transparent,#bfdbfe,transparent)"></div>
-
-      <!-- SCORE SUMMARY ROW -->
-      <div class="mx-6 my-5 flex items-stretch rounded-2xl overflow-hidden border border-blue-100">
-        <div class="flex-1 text-center py-4 px-2 border-r border-blue-100" style="background:#f8faff">
-          <div class="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wide">Selected</div>
-          <div id="selectedCount" class="text-2xl font-black leading-none" style="color:#2563eb;font-family:'Playfair Display',serif">0</div>
-          <div class="text-xs font-bold text-slate-400 mt-1">बीमारियाँ</div>
+        <!-- SCORE SUMMARY ROW -->
+        <div class="mx-6 my-5 flex items-stretch rounded-2xl overflow-hidden border border-blue-100">
+          <div class="flex-1 text-center py-4 px-2 border-r border-blue-100" style="background:#f8faff">
+            <div class="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wide">Selected</div>
+            <div id="selectedCount" class="text-2xl font-black leading-none"
+              style="color:#2563eb;font-family:'Playfair Display',serif">0</div>
+            <div class="text-xs font-bold text-slate-400 mt-1">बीमारियाँ</div>
+          </div>
+          <div class="flex-1 text-center py-4 px-2" style="background:#f0f6ff">
+            <div class="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wide">Score</div>
+            <div id="healthScore" class="text-2xl font-black leading-none transition-colors duration-300"
+              style="color:#2563eb;font-family:'Playfair Display',serif">0%</div>
+            <div class="text-xs font-bold text-slate-400 mt-1">Health</div>
+          </div>
         </div>
-        <div class="flex-1 text-center py-4 px-2" style="background:#f0f6ff">
-          <div class="text-xs font-bold text-slate-400 mb-1 uppercase tracking-wide">Score</div>
-          <div id="healthScore" class="text-2xl font-black leading-none transition-colors duration-300" style="color:#2563eb;font-family:'Playfair Display',serif">0%</div>
-          <div class="text-xs font-bold text-slate-400 mt-1">Health</div>
-        </div>
-      </div>
 
-      <!-- RESULT BOX -->
-      <div id="resultBox" class="mx-6 mb-5 p-5 rounded-2xl border-2 transition-all duration-500" style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border-color:#e2e8f0">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-sm font-bold text-slate-500">स्थिति / Status:</span>
-          <span id="category" class="px-3 py-1 rounded-full text-xs font-black transition-all duration-300" style="background:#e2e8f0;color:#64748b">—</span>
+        <!-- RESULT BOX -->
+        <div id="resultBox" class="mx-6 mb-5 p-5 rounded-2xl border-2 transition-all duration-500"
+          style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border-color:#e2e8f0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-bold text-slate-500">स्थिति / Status:</span>
+            <span id="category" class="px-3 py-1 rounded-full text-xs font-black transition-all duration-300"
+              style="background:#e2e8f0;color:#64748b">—</span>
+          </div>
+          <p class="text-sm font-black mb-3 transition-colors duration-300" id="alertText"></p>
+          <div class="p-3 rounded-xl" style="background:rgba(255,255,255,.9);border:1px solid #e2e8f0">
+            <p class="text-slate-600 text-sm font-semibold leading-relaxed" id="message">🔍 ऊपर किसी भी बीमारी का slider
+              move करें — score automatically calculate होगा</p>
+          </div>
         </div>
-        <p class="text-sm font-black mb-3 transition-colors duration-300" id="alertText"></p>
-        <div class="p-3 rounded-xl" style="background:rgba(255,255,255,.9);border:1px solid #e2e8f0">
-          <p class="text-slate-600 text-sm font-semibold leading-relaxed" id="message">🔍 ऊपर किसी भी बीमारी का slider move करें — score automatically calculate होगा</p>
+
+        <!-- CTA -->
+        <div class="px-6 pb-7">
+          <button
+            class="btn-shine w-full py-4 rounded-2xl font-black text-base text-white flex items-center justify-center gap-3 transition-all hover:scale-[1.02]"
+            style="background:linear-gradient(135deg,#2563eb,#3b82f6);box-shadow:0 8px 28px rgba(37,99,235,.4)"
+            onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
+            <span class="text-xl">📋</span>
+            <span>Get Professional Consultation</span>
+            <span class="text-base animate-pulse">✨</span>
+          </button>
         </div>
-      </div>
 
-      <!-- CTA -->
-      <div class="px-6 pb-7">
-        <button class="btn-shine w-full py-4 rounded-2xl font-black text-base text-white flex items-center justify-center gap-3 transition-all hover:scale-[1.02]"
-                style="background:linear-gradient(135deg,#2563eb,#3b82f6);box-shadow:0 8px 28px rgba(37,99,235,.4)"
-                onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
-          <span class="text-xl">📋</span>
-          <span>Get Professional Consultation</span>
-          <span class="text-base animate-pulse">✨</span>
-        </button>
-      </div>
-
-    </div><!-- /main card -->
-  </section>
+      </div><!-- /main card -->
+    </section>
 
     <!-- WHAT WE OFFER -->
     <div class="sec sec-light">
       <div class="rv sec-head">
         <div class="sec-line"></div>
-        <h2>हम क्या प्रदान करते हैं?</h2>
+        <h2>हम आपके लिए क्या लेकर आए हैं?</h2>
         <p>Specialist Doctor द्वारा संपूर्ण मार्गदर्शन</p>
       </div>
       <div class="rv offer-cards-wrapper">
         <div class="offer-card">
-          <img src="./Image/Benifit1.png" class="w-36 h-36"  alt="Consultation" />
+          <img src="./Image/Benifit1.png" class="w-36 h-36" alt="Consultation" />
           <div class="offer-body">
             <div class="offer-num">01</div>
-            <h4>विस्तृत मेडिकल चर्चा</h4>
-            <p>आपकी स्थिति की पूरी समीक्षा और जरूरी जांच की सलाह</p>
+            <h4>ज़रा विस्तार से समस्या पर चर्चा</h4>
+            <p>आपकी स्थिति की पूरी Report और जरूरी जांच की सलाह</p>
           </div>
         </div>
         <div class="offer-card">
-          <img src="./Image/Benifit2.png" class="w-36 h-36"  alt="Report" />
+          <img src="./Image/Benifit2.png" class="w-36 h-36" alt="Report" />
           <div class="offer-body">
             <div class="offer-num">02</div>
             <h4>रिपोर्ट विश्लेषण</h4>
-            <p>विशेषज्ञ डॉक्टर द्वारा आपकी रिपोर्ट की विस्तृत समीक्षा</p>
+            <p>विशेषज्ञ डॉक्टर द्वारा आपकी रिपोर्ट की विस्तृत Report</p>
           </div>
         </div>
         <div class="offer-card">
-          <img src="./Image/Benifit3.png" class="w-36 h-36"  alt="Diet" />
+          <img src="./Image/Benifit3.png" class="w-36 h-36" alt="Diet" />
           <div class="offer-body">
             <div class="offer-num">03</div>
             <h4>Customized Diet Chart</h4>
@@ -1777,7 +1970,7 @@
           </div>
         </div>
         <div class="offer-card">
-          <img src="./Image/Benifit4.png" class="w-36 h-38"  alt="Followup" />
+          <img src="./Image/Benifit4.png" class="w-36 h-38" alt="Followup" />
           <div class="offer-body">
             <div class="offer-num">04</div>
             <h4>Follow-up Support</h4>
@@ -1793,8 +1986,8 @@
     <div class="sec sec-white">
       <div class="rv sec-head">
         <div class="sec-line"></div>
-        <h2>कैसे काम करता है?</h2>
-        <p>5 आसान कदमों में संपूर्ण मार्गदर्शन</p>
+        <h2>यह आखिर काम कैसे करता है?</h2>
+        <p>बस 5 आसान स्टेप्स में पूरा तरीका समझिए</p>
       </div>
       <div class="rv">
         <div class="step-wrap">
@@ -1824,7 +2017,7 @@
           </div>
           <div class="step-card">
             <h4>Doctor Consultation</h4>
-            <p>Specialist Doctor से फोन या वीडियो पर विस्तृत परामर्श</p>
+            <p>Specialist Doctor से फोन या वीडियो पर पूरी सलाह लें</p>
           </div>
         </div>
         <div class="step-wrap">
@@ -1833,7 +2026,7 @@
             <div class="step-vline"></div>
           </div>
           <div class="step-card">
-            <h4>रिपोर्ट व लक्षण समीक्षा</h4>
+            <h4>रिपोर्ट व लक्षण Report</h4>
             <p>Evidence Based Evaluation, Risk Assessment, Stage Identification</p>
           </div>
         </div>
@@ -1855,12 +2048,12 @@
     <!-- KEY APPROACH -->
     <div class="sec sec-dark">
       <div class="rv" style="text-align:center;margin-bottom:24px">
-        <h2 style="font-size:26px;color:white;margin-bottom:6px">🧪 हमारा कार्य करने का तरीका</h2>
-        <p style="font-size:15px;color:rgba(255,255,255,.55);font-weight:600">हम किसी चमत्कारी इलाज का दावा नहीं करते
+        <h2 style="font-size:26px;color:white;margin-bottom:6px">🧪 👉 हम आपके साथ कैसे आगे बढ़ते हैं?</h2>
+        <p style="font-size:15px;color:rgb(255,255,255);font-weight:600">हम किसी चमत्कारी इलाज का दावा नहीं करते
         </p>
       </div>
-      <img src="./Image/key.png" class="rv"
-        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+      <img src="./Image/keyapproch.png" class="rv"
+        style="width:100%;height:350px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
         loading="lazy" />
       <div class="rv app-grid">
         <div class="app-card">
@@ -1903,44 +2096,213 @@
       <div class="rv sec-head">
         <div class="sec-line"></div>
         <h2>🏥 Certified &amp; Trusted</h2>
-        <p>आपके विश्वास की नींव — हमारी पारदर्शी प्रक्रिया</p>
+        <p>हम खुलकर बताते हैं — ताकि आपका भरोसा बना रहे</p>
       </div>
       <div class="rv cert-grid">
         <div class="cert-card">
-           <img src="./Image/exprirense.png" class="rv"
-        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
-        loading="lazy" />
+          <img src="./Image/exprirense.png" class="rv"
+            style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+            loading="lazy" />
           <div class="cert-ico">👨‍⚕️</div>
           <h4>अनुभवी विशेषज्ञ डॉक्टर</h4>
           <p>वर्षों के अनुभव वाले Certified Specialists</p>
         </div>
         <div class="cert-card">
-           <img src="./Image/Clinical_Assessment.png" class="rv"
-        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
-        loading="lazy" />
+          <img src="./Image/Clinical_Assessment.png" class="rv"
+            style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+            loading="lazy" />
           <div class="cert-ico">🔬</div>
           <h4>Clinical Assessment</h4>
           <p>Clinical जांच पर आधारित सटीक सलाह</p>
         </div>
-        <div class="cert-card" >
-           <img src="./Image/Transparent_Process.png" class="rv"
-        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
-        loading="lazy" />
+        <div class="cert-card">
+          <img src="./Image/Transparent_Process.png" class="rv"
+            style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+            loading="lazy" />
           <div class="cert-ico">🔍</div>
           <h4>Transparent Process</h4>
-          <p>कोई छुपा शुल्क नहीं, पूर्ण पारदर्शिता</p>
+          <p>हम जो बताते हैं, वही लेते हैं — कोई छुपी हुई फीस नहीं</p>
         </div>
-        <div class="cert-card">
-           <img src="./Image/privacy_protect.png" class="rv"
-        style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
-        loading="lazy" />
+        <!-- <div class="cert-card">
+          <img src="./Image/privacy_protect.png" class="rv"
+            style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
+            loading="lazy" />
           <div class="cert-ico">🔒</div>
           <h4>Privacy Protected</h4>
           <p>आपकी सभी जानकारी पूर्णतः सुरक्षित</p>
-        </div>
+        </div> -->
       </div>
-    
+
     </div>
+
+    <!-- ══════════ DOCTORS SECTION ══════════ -->
+    <section class="py-6" id="doctors" style="background:linear-gradient(160deg,#0f172a 0%,#1e3a5f 60%,#0f172a 100%)">
+
+      <div class="rv text-center mb-8 px-4">
+        <div class="w-10 h-1 rounded-full mx-auto mb-4" style="background:linear-gradient(90deg,#2563eb,#06b6d4)"></div>
+        <h2 class="text-2xl font-black text-white mb-2">👨‍⚕️ हमारे विशेषज्ञ डॉक्टर</h2>
+        <p class="text-sm font-semibold" style="color:rgba(255,255,255,.55)">Certified BAMS Ayurvedic Physicians — आपकी
+          सेवा में</p>
+      </div>
+
+      <!-- Doctor Swiper -->
+      <div class="swiper doctorSwiper rv">
+        <div class="swiper-wrapper">
+
+          <!-- DR. SUHAIL SIDDIQUI -->
+          <div class="swiper-slide">
+            <div class="doctor-card">
+              <!-- Photo area -->
+              <div class="doc-photo-wrap">
+                <img src="./Image/Doctor.jpeg" alt="Dr Suhail Siddiqui" class="doc-photo" />
+                <div class="doc-photo-overlay"></div>
+                <!-- Verified badge -->
+                <div class="doc-verified">✔ Verified</div>
+              </div>
+              <!-- Info -->
+              <div class="doc-info">
+                <div class="doc-specialty-chip">🌿 Ayurvedic Physician</div>
+                <h3 class="doc-name">Dr. Suhail Siddiqui</h3>
+                <p class="doc-degree">BAMS — Bachelor of Ayurvedic Medicine & Surgery</p>
+                <div class="doc-stats">
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">2+</span>
+                    <span class="doc-stat-label">Years Exp.</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">BAMS</span>
+                    <span class="doc-stat-label">Qualified</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">⭐ 4.8</span>
+                    <span class="doc-stat-label">Rating</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DR. SUHAIL SIDDIQUI -->
+          <div class="swiper-slide">
+            <div class="doctor-card">
+              <!-- Photo area -->
+              <div class="doc-photo-wrap">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80"
+                  alt="Dr Suhail Siddiqui" class="doc-photo" />
+                <div class="doc-photo-overlay"></div>
+                <!-- Verified badge -->
+                <div class="doc-verified">✔ Verified</div>
+              </div>
+              <!-- Info -->
+              <div class="doc-info">
+                <div class="doc-specialty-chip">🌿 Ayurvedic Physician</div>
+                <h3 class="doc-name">Dr. Suhail Siddiqui</h3>
+                <p class="doc-degree">BAMS — Bachelor of Ayurvedic Medicine & Surgery</p>
+                <div class="doc-stats">
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">2+</span>
+                    <span class="doc-stat-label">Years Exp.</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">BAMS</span>
+                    <span class="doc-stat-label">Qualified</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">⭐ 4.8</span>
+                    <span class="doc-stat-label">Rating</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DR. SAGAR RAWAT -->
+          <div class="swiper-slide">
+            <div class="doctor-card">
+              <div class="doc-photo-wrap">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80" alt="Dr Sagar Rawat"
+                  class="doc-photo" />
+                <div class="doc-photo-overlay"></div>
+                <div class="doc-verified">✔ Verified</div>
+              </div>
+              <div class="doc-info">
+                <div class="doc-specialty-chip">🌿 Ayurvedic Physician</div>
+                <h3 class="doc-name">Dr. Sagar Rawat</h3>
+                <p class="doc-degree">BAMS — Bachelor of Ayurvedic Medicine & Surgery</p>
+                <div class="doc-stats">
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">3+</span>
+                    <span class="doc-stat-label">Years Exp.</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">BAMS</span>
+                    <span class="doc-stat-label">Qualified</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">⭐ 4.9</span>
+                    <span class="doc-stat-label">Rating</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DR. BHAWNA -->
+          <div class="swiper-slide">
+            <div class="doctor-card">
+              <div class="doc-photo-wrap">
+                <img src="./Image/Doctor1.jpg" alt="Dr Bhawna" class="doc-photo" />
+                <div class="doc-photo-overlay"></div>
+                <div class="doc-verified">✔ Verified</div>
+              </div>
+              <div class="doc-info">
+                <div class="doc-specialty-chip">🌿 Ayurvedic Physician</div>
+                <h3 class="doc-name">Dr. Bhawna</h3>
+                <p class="doc-degree">BAMS — Ayurvedic Physician</p>
+                <div class="doc-stats">
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">2+</span>
+                    <span class="doc-stat-label">Years Exp.</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">BAMS</span>
+                    <span class="doc-stat-label">Qualified</span>
+                  </div>
+                  <div class="doc-stat-divider"></div>
+                  <div class="doc-stat">
+                    <span class="doc-stat-num">⭐ 4.8</span>
+                    <span class="doc-stat-label">Rating</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /swiper-wrapper -->
+        <div class="swiper-pagination"></div>
+      </div><!-- /swiper -->
+
+      <!-- Trust strip -->
+      <div class="rv flex flex-wrap justify-center gap-3 mt-8 px-4">
+        <span class="text-xs font-bold px-4 py-2 rounded-full"
+          style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8)">✅
+          Government Registered</span>
+        <span class="text-xs font-bold px-4 py-2 rounded-full"
+          style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8)">🌿
+          BAMS Certified</span>
+        <span class="text-xs font-bold px-4 py-2 rounded-full"
+          style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8)">📞
+          Online Consultation</span>
+      </div>
+
+    </section>
 
     <!-- LIMITED SLOTS -->
     <div class="sec" style="background:linear-gradient(135deg,#eff6ff,#e0f2fe)">
@@ -1957,8 +2319,8 @@
         </div>
         <h3 style="font-size:22px;color:white;line-height:1.4;margin-bottom:12px">विशेषज्ञ डॉक्टर के साथ सीमित समय स्लॉट
           उपलब्ध हैं</h3>
-        <p style="font-size:15px;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:4px">अगर आप या आपके परिवार में
-          कोई इन बीमारियों से जूझ रहा है — <span style="color:var(--cyan);font-weight:800">तो देरी न करें।</span></p>
+        <p style="font-size:15px;color:rgb(255,255,255);font-weight:600;margin-bottom:4px">अगर आप या आपके परिवार में
+          कोई इन बीमारियों से जूझ रहा है — <span style="color:var(--gold);font-weight:800">तो देरी न करें।</span></p>
         <div class="slots-nums">
           <div class="slot-num-box">
             <div class="slot-n" id="cnt-slots">12</div>
@@ -1992,7 +2354,7 @@
           <span style="font-size:13px;font-weight:700;color:#6ee7b7">Online Slots Available</span>
         </div>
         <h2 style="font-size:26px;color:white;margin-bottom:8px">अभी Consultation बुक करें</h2>
-        <p style="font-size:15px;color:rgba(255,255,255,.55);font-weight:600">विशेषज्ञ डॉक्टर के साथ सीमित स्लॉट — देरी
+        <p style="font-size:15px;color:rgb(255,255,255);font-weight:600">विशेषज्ञ डॉक्टर के साथ सीमित स्लॉट — देरी
           न करें</p>
       </div>
 
@@ -2046,7 +2408,7 @@
         </div>
         <div class="review-meta" style="flex:1">
           <div class="stars">★★★★★</div>
-          <p>10,000+ समीक्षाओं पर आधारित</p>
+          <p>10,000+ Reportओं पर आधारित</p>
           <div class="review-bar-wrap">
             <div class="review-bar-row">
               <span>5★</span>
@@ -2194,7 +2556,7 @@
           <div class="faq-body">फॉर्म भरने के बाद हमारी टीम आपसे संपर्क कर सभी जानकारी देगी। कोई छुपा शुल्क नहीं।</div>
         </div>
       </div>
-    </div>    
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -2245,46 +2607,46 @@
 
     // ── ANALYSIS ENGINE — score = sum ÷ number of touched sliders
     function updateAnalysis() {
-      const vals  = diseaseConfigs.map(c => parseInt(document.getElementById(c.id).value));
+      const vals = diseaseConfigs.map(c => parseInt(document.getElementById(c.id).value));
       const count = vals.filter(v => v > 0).length;
-      const sum   = vals.reduce((a, b) => a + b, 0);
+      const sum = vals.reduce((a, b) => a + b, 0);
       const score = count > 0 ? Math.round(sum / count) : 0;
 
       document.getElementById('selectedCount').textContent = count;
-      document.getElementById('healthScore').textContent   = score + '%';
+      document.getElementById('healthScore').textContent = score + '%';
 
       let category, days;
       if (score === 0 || count === 0) { category = ''; days = 0; }
-      else if (score < 25) { category = 'Healthy';         days = Math.round(90 - score * 2); }
-      else if (score < 50) { category = 'Mild Concern';    days = Math.round(60 - score); }
+      else if (score < 25) { category = 'Healthy'; days = Math.round(90 - score * 2); }
+      else if (score < 50) { category = 'Mild Concern'; days = Math.round(60 - score); }
       else if (score < 75) { category = 'Needs Attention'; days = Math.max(1, Math.round(30 - score * 0.3)); }
-      else                 { category = 'High Concern';    days = 0; }
+      else { category = 'High Concern'; days = 0; }
 
       const catEl = document.getElementById('category');
       catEl.textContent = category || '—';
 
       if (category) {
-      updateResultBoxColors(category);
-      document.getElementById('alertText').textContent = getAlertText(category);
-      document.getElementById('message').textContent   = getMessage(category, days);
+        updateResultBoxColors(category);
+        document.getElementById('alertText').textContent = getAlertText(category);
+        document.getElementById('message').textContent = getMessage(category, days);
       } else {
-      const rb = document.getElementById('resultBox');
-      rb.style.background   = 'linear-gradient(135deg,#f8fafc,#f1f5f9)';
-      rb.style.borderColor  = '#e2e8f0';
-      catEl.style.background = '#e2e8f0'; catEl.style.color = '#64748b';
-      document.getElementById('alertText').textContent = '';
-      document.getElementById('message').textContent   = '🔍 ऊपर किसी भी बीमारी का slider move करें — score automatically calculate होगा';
-      document.getElementById('healthScore').style.color  = '#2563eb';
-      document.getElementById('selectedCount').style.color = '#2563eb';
+        const rb = document.getElementById('resultBox');
+        rb.style.background = 'linear-gradient(135deg,#f8fafc,#f1f5f9)';
+        rb.style.borderColor = '#e2e8f0';
+        catEl.style.background = '#e2e8f0'; catEl.style.color = '#64748b';
+        document.getElementById('alertText').textContent = '';
+        document.getElementById('message').textContent = '🔍 ऊपर किसी भी बीमारी का slider move करें — score automatically calculate होगा';
+        document.getElementById('healthScore').style.color = '#2563eb';
+        document.getElementById('selectedCount').style.color = '#2563eb';
       }
-      }
+    }
 
-     function updateResultBoxColors(category) {
-      const box  = document.getElementById('resultBox');
-      const cat  = document.getElementById('category');
-      const hs   = document.getElementById('healthScore');
-      const sc   = document.getElementById('selectedCount');
-      
+    function updateResultBoxColors(category) {
+      const box = document.getElementById('resultBox');
+      const cat = document.getElementById('category');
+      const hs = document.getElementById('healthScore');
+      const sc = document.getElementById('selectedCount');
+
       const styles = {
         "Healthy": {
           boxBg: 'linear-gradient(135deg,#f0fdf4,#dcfce7)',
@@ -2315,7 +2677,7 @@
           scoreColor: '#dc2626'
         }
       };
-      
+
       const style = styles[category];
       if (style) {
         box.style.background = style.boxBg;
@@ -2328,7 +2690,7 @@
     }
 
     function getAlertText(cat) {
-      return { "Healthy":"✅ आपकी स्थिति नियंत्रण में है", "Mild Concern":"⚠️ कुछ हल्की परेशानियाँ दिख रही हैं", "Needs Attention":"🔶 ध्यान देने की ज़रूरत है", "High Concern":"🚨 तुरंत देखभाल लेना ज़रूरी है" }[cat] || '';
+      return { "Healthy": "✅ आपकी स्थिति नियंत्रण में है", "Mild Concern": "⚠️ कुछ हल्की परेशानियाँ दिख रही हैं", "Needs Attention": "🔶 ध्यान देने की ज़रूरत है", "High Concern": "🚨 तुरंत देखभाल लेना ज़रूरी है" }[cat] || '';
     }
 
     function getMessage(category, days) {
@@ -2336,9 +2698,9 @@
         return `⚠ आपकी स्वास्थ्य स्थिति तुरंत ध्यान देने योग्य है। कृपया देरी न करें — अभी विशेषज्ञ से परामर्श लें।`;
       }
       return {
-        "Healthy":        `आपकी स्वास्थ्य स्थिति अभी control में है। Safe zone में लगभग ${days} दिन बाकी हैं।`,
-        "Mild Concern":   `कुछ हल्की स्वास्थ्य परेशानियाँ दिख रही हैं। अगर सही देखभाल नहीं ली तो लगभग ${days} दिनों में स्थिति खराब हो सकती है।`,
-        "Needs Attention":`Noticeable स्वास्थ्य समस्याएँ मौजूद हैं। आपके पास लगभग ${days} दिन हैं — अभी विशेषज्ञ परामर्श लें।`,
+        "Healthy": `आपकी स्वास्थ्य स्थिति अभी control में है। Safe zone में लगभग ${days} दिन बाकी हैं।`,
+        "Mild Concern": `कुछ हल्की स्वास्थ्य परेशानियाँ दिख रही हैं। अगर सही देखभाल नहीं ली तो लगभग ${days} दिनों में स्थिति खराब हो सकती है।`,
+        "Needs Attention": `Noticeable स्वास्थ्य समस्याएँ मौजूद हैं। आपके पास लगभग ${days} दिन हैं — अभी विशेषज्ञ परामर्श लें।`,
       }[category] || '';
     }
 
@@ -2346,15 +2708,15 @@
     diseaseConfigs.forEach(config => {
       const slider = document.getElementById(config.id);
       const display = document.getElementById(config.displayId);
-      
-      slider.addEventListener('input', function() {
+
+      slider.addEventListener('input', function () {
         const value = this.value;
         display.textContent = value + '%';
-        
+
         // Update slider gradient
         const percent = (value / 100) * 100;
         this.style.background = `linear-gradient(to right, ${config.color1} 0%, ${config.color2} ${percent}%, #e2e8f0 ${percent}%, #e2e8f0 100%)`;
-        
+
         // Update analysis
         updateAnalysis();
       });
@@ -2373,6 +2735,37 @@
       document.getElementById('f-dis').value = '';
       setTimeout(() => document.getElementById('s-msg').style.display = 'none', 6000);
     }
+  </script>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize Doctor Swiper
+    var doctorSwiper = new Swiper(".doctorSwiper", {
+      slidesPerView: 1.2,
+      spaceBetween: 20,
+      centeredSlides: false,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+      },
+    });
   </script>
 </body>
 
