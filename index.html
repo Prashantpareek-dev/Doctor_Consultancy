@@ -1586,7 +1586,8 @@
       <span class="topbar-badge">⚕ Verified Doctors</span>
     </div>
 
-    <img src="./Image/doctors.png" alt="">
+    <div id="hero" ></div>
+    <img  src="./Image/doctors1.png" alt="">
 
     <!-- ══════════ HERO SECTION ══════════ -->
     <section class="relative min-h-screen overflow-hidden dot-grid"
@@ -2189,7 +2190,7 @@
             <div class="doctor-card">
               <!-- Photo area -->
               <div class="doc-photo-wrap">
-                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80"
+                <img src="./Image/doctor3.png"
                   alt="Dr Suhail Siddiqui" class="doc-photo" />
                 <div class="doc-photo-overlay"></div>
                 <!-- Verified badge -->
@@ -2198,7 +2199,7 @@
               <!-- Info -->
               <div class="doc-info">
                 <div class="doc-specialty-chip">🌿 Ayurvedic Physician</div>
-                <h3 class="doc-name">Dr. Suhail Siddiqui</h3>
+                <h3 class="doc-name">Dr. Sahil</h3>
                 <p class="doc-degree">BAMS — Bachelor of Ayurvedic Medicine & Surgery</p>
                 <div class="doc-stats">
                   <div class="doc-stat">
@@ -2224,7 +2225,7 @@
           <div class="swiper-slide">
             <div class="doctor-card">
               <div class="doc-photo-wrap">
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80" alt="Dr Sagar Rawat"
+                <img src="./Image/Doctor2.jpeg" alt="Dr Sagar Rawat"
                   class="doc-photo" />
                 <div class="doc-photo-overlay"></div>
                 <div class="doc-verified">✔ Verified</div>
@@ -2264,7 +2265,7 @@
               <div class="doc-info">
                 <div class="doc-specialty-chip">🌿 Ayurvedic Physician</div>
                 <h3 class="doc-name">Dr. Bhawna</h3>
-                <p class="doc-degree">BAMS — Ayurvedic Physician</p>
+                <p class="doc-degree">BAMS — Bachelor of Ayurvedic Medicine & Surgery</p>
                 <div class="doc-stats">
                   <div class="doc-stat">
                     <span class="doc-stat-num">2+</span>
@@ -2575,7 +2576,8 @@
         l.style.opacity = '0'; l.style.visibility = 'hidden';
       }, 1800);
     });
-
+    
+   
     // Scroll reveal
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
