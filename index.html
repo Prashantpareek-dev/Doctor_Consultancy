@@ -60,57 +60,6 @@
       overflow-x: hidden;
     }
 
-    /* ── LOADER ── */
-    #loader {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: var(--navy);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      transition: opacity .7s, visibility .7s;
-    }
-
-    .loader-ring {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 3px solid rgba(255, 255, 255, .15);
-      border-top-color: var(--sky);
-      animation: spin 1s linear infinite;
-    }
-
-    .loader-plus {
-      position: absolute;
-      width: 36px;
-      height: 36px;
-    }
-
-    .loader-plus::before,
-    .loader-plus::after {
-      content: '';
-      position: absolute;
-      background: white;
-      border-radius: 3px;
-    }
-
-    .loader-plus::before {
-      width: 6px;
-      height: 36px;
-      left: 15px;
-      top: 0;
-    }
-
-    .loader-plus::after {
-      width: 36px;
-      height: 6px;
-      left: 0;
-      top: 15px;
-    }
-
     /* ── TOP BAR ── */
     .topbar {
       background: var(--navy);
@@ -1563,15 +1512,6 @@
 
 <body>
 
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="loader-ring"></div>
-    <div class="loader-plus" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-    <p
-      style="font-family:'Playfair Display',serif;font-size:16px;color:rgba(255,255,255,.7);font-weight:700;margin-top:50px">
-      विशेषज्ञ परामर्श सेवा</p>
-  </div>
-
   <!-- FLOAT BUTTON -->
   <a href="#book" class="float-btn">📅 अभी बुक करें</a>
 
@@ -1603,8 +1543,6 @@
         style="background:radial-gradient(circle,#06b6d4,transparent)"></div>
 
       <div class="relative px-5 py-4">
-        <!-- <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=480&q=80" alt="Doctor"
-      class="hero-img" /> -->
 
         <!-- Live badge -->
         <div class="anim-fadeUp flex items-center gap-2 self-start mb-6 inline-flex">
@@ -1791,23 +1729,9 @@
       </div>
     </div>
 
-    <!-- TRUST CHIPS -->
-    <!-- <div class="trust-chips rv">
-      <span class="trust-chip">✅ Evidence Based</span>
-      <span class="trust-chip">🔒 Privacy Protected</span>
-      <span class="trust-chip">📞 Online Available</span>
-      <span class="trust-chip">⭐ Certified Doctors</span>
-    </div> -->
-
     <!-- ══════════ ANALYSIS SECTION ══════════ -->
     <section class="py-4 px-4" id="analysis"
       style="background:linear-gradient(160deg,#eff6ff 0%,#e0f2fe 60%,#eff6ff 100%)">
-
-      <!-- <div class="rv text-center mb-8">
-        <div class="w-10 h-1 rounded-full mx-auto mb-4" style="background:linear-gradient(90deg,#2563eb,#06b6d4)"></div>
-        <h2 class="text-2xl font-black text-slate-900 mb-2">स्वास्थ्य विश्लेषण करें</h2>
-        <p class="text-sm text-slate-500 font-semibold">अपनी बीमारी के लक्षणों की severity slide करके जानें</p>
-      </div> -->
 
       <!-- MAIN CARD — vertical list layout like screenshot -->
       <div class="rv max-w-xl mx-auto rounded-3xl overflow-hidden"
@@ -2127,14 +2051,6 @@
           <h4>Transparent Process</h4>
           <p>हम जो बताते हैं, वही लेते हैं — कोई छुपी हुई फीस नहीं</p>
         </div>
-        <!-- <div class="cert-card">
-          <img src="./Image/privacy_protect.png" class="rv"
-            style="width:100%;height:250px;object-fit:cover;border-radius:18px;margin-bottom:20px" alt="Approach"
-            loading="lazy" />
-          <div class="cert-ico">🔒</div>
-          <h4>Privacy Protected</h4>
-          <p>आपकी सभी जानकारी पूर्णतः सुरक्षित</p>
-        </div> -->
       </div>
 
     </div>
@@ -2603,15 +2519,6 @@
   </div>
 
   <script>
-    // Loader
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const l = document.getElementById('loader');
-        l.style.opacity = '0'; l.style.visibility = 'hidden';
-      }, 1800);
-    });
-
-
     // Scroll reveal
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
